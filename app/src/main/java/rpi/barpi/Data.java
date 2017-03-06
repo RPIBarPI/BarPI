@@ -12,6 +12,8 @@ public class Data
 
     public static SharedPreferences saveData;
 
+    public static MainActivity mainAct=null;
+
     public static int exampleInteger;
 
     public static ArrayList<Bar> bars=new ArrayList<Bar>();

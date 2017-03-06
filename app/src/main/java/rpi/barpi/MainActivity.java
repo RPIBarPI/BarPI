@@ -1,6 +1,7 @@
 package rpi.barpi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity
         if(!Data.initialized)
             Data.init(getApplicationContext().getSharedPreferences("SaveData", Context.MODE_PRIVATE));
 
+        Data.mainAct=this;
+
         //set the gui objects
         lvbars=(ListView)findViewById(R.id.barListView);
 
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3)
             {
                 tempThis.contextMenuItemSelected=position;
-                Toast.makeText(tempThis, "Item "+Integer.toString(tempThis.contextMenuItemSelected)+" Selected!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(tempThis, BarActivity.class));
             }
         });
 
