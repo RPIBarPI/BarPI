@@ -1,23 +1,38 @@
 package rpi.barpi;
 
+import java.util.ArrayList;
+
 public class Bar //basic information on bars
 {
     private int id=0;
     private String name="";
+    private float rating;
+    public ArrayList<Comment> comments=new ArrayList<Comment>();
+    private Location location=new Location();
+    public ArrayList<Event> events=new ArrayList<Event>();//includes specials
+    public ArrayList<Drink> drinks=new ArrayList<Drink>();//the menu
 
-    public Bar(int newID, String newName)
+    //constructors
+    public Bar(int newID, String newName, float newRating, Location newLocation)
     {
         id=newID;
         name=newName;
+        rating=newRating;
+        location=new Location(newLocation);//Using value not ref
     }
 
+    //gets
     public int getID() { return id; }
     public String getName() { return name; }
+    public float getRating() { return rating; }
+    public Location getLocation() { return location; }
 
-
-    public void setID(int newID) { id=newID; }
+    //sets
     public void setName(String newName) { name=newName; }
+    public void setRating(float newRating) { rating=newRating; }
+    public void setLocation(Location newLocation) { location=newLocation; }
 
+    //other
     @Override
     public String toString()
     {
