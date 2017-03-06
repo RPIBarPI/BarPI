@@ -54,10 +54,10 @@ public class MainActivity extends AppCompatActivity
         });
 
         Data.bars.clear();
-        Data.bars.add(new Bar(0, "Bar Troy"));
-        Data.bars.add(new Bar(1, "Ruck"));
-        Data.bars.add(new Bar(2, "Olearys"));
-        Data.bars.add(new Bar(3, "Union Pub"));
+        Data.bars.add(new Bar(0, "Bar Troy", 0.0f, new Location()));
+        Data.bars.add(new Bar(1, "Ruck", 0.0f, new Location()));
+        Data.bars.add(new Bar(2, "Olearys", 0.0f, new Location()));
+        Data.bars.add(new Bar(3, "Union Pub", 0.0f, new Location()));
     }
 
     @Override
