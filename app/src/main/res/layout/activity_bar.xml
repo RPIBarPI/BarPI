@@ -6,6 +6,48 @@
     android:layout_height="match_parent"
     tools:context="rpi.barpi.BarActivity">
 
+    <LinearLayout
+        android:id="@+id/ba_rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
 
+        <Button
+            android:id="@+id/ba_btnstarone"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="*"
+            android:onClick="rateBar" />
+
+        <Button
+            android:id="@+id/ba_btnstartwo"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="*"
+            android:onClick="rateBar" />
+
+        <Button
+            android:id="@+id/ba_btnstarthree"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="*"
+            android:onClick="rateBar" />
+
+        <Button
+            android:id="@+id/ba_btnstarfour"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="*"
+            android:onClick="rateBar" />
+
+        <Button
+            android:id="@+id/ba_btnstarfive"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:text="*"
+            android:onClick="rateBar" />
+
+    </LinearLayout>
 
 </RelativeLayout>
