@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity
 {
@@ -53,6 +55,13 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        //connect to the server
+        ArrayList<String> data=new ArrayList<String>();
+        data.add("CONNECT");
+
+        Sockets.connect(data);
+
+        //test data
         Data.bars.clear();
         Data.bars.add(new Bar(0, "Bar Troy", 0.0f, new Location()));
         Data.bars.add(new Bar(1, "Ruck", 0.0f, new Location()));
