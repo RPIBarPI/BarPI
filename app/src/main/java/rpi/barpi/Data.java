@@ -36,4 +36,5 @@ public class Data
         SDEditor.putInt("exampleinteger", exampleInteger);
         SDEditor.apply();
     }
+
 }
