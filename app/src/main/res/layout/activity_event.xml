@@ -3,14 +3,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:visibility="visible">
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ea_rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/ea_btnstarone"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:onClick="rateBar"
+            android:text="*" />
+
+        <Button
+            android:id="@+id/ea_btnstartwo"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:onClick="rateBar"
+            android:text="*" />
+
+        <Button
+            android:id="@+id/ea_btnstarthree"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:onClick="rateBar"
+            android:text="*" />
+
+        <Button
+            android:id="@+id/ea_btnstarfour"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:onClick="rateBar"
+            android:text="*" />
+
+        <Button
+            android:id="@+id/ea_btnstarfive"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:onClick="rateBar"
+            android:text="*" />
+
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/eventImage"
         android:layout_width="match_parent"
         android:layout_height="15.0mm"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/ea_rating"
         android:layout_centerHorizontal="true"
         android:contentDescription="Pic of event"
         app:srcCompat="@android:color/darker_gray" />
