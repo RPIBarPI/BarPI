@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         //test data
         Data.bars.clear();
         Data.bars.add(new Bar(0, "Bar Troy", 0.0f, new Location()));
-        Data.bars.add(new Bar(1, "Ruck", 0.0f, new Location()));
+        Data.bars.add(new Bar(1, "The Ruck", 0.0f, new Location()));
         Data.bars.add(new Bar(2, "Olearys", 0.0f, new Location()));
         Data.bars.add(new Bar(3, "Union Pub", 0.0f, new Location()));
     }

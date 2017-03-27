@@ -9,7 +9,7 @@ public class Bar //basic information on bars
     private float rating;
     public ArrayList<Comment> comments=new ArrayList<Comment>();
     private Location location=new Location();
-    public ArrayList<Event> events=new ArrayList<Event>();//includes specials
+    public static ArrayList<Event> events=new ArrayList<Event>();//includes specials
     public ArrayList<Drink> drinks=new ArrayList<Drink>();//the menu
 
     //constructors

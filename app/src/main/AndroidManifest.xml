@@ -36,6 +36,15 @@
                 android:value=".MainActivity" />
         </activity>
 
+        <activity
+            android:name=".EventActivity"
+            android:parentActivityName=".BarActivity"
+            android:label="Event" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BarActivity" />
+        </activity>
+
     </application>
 
 </manifest>
