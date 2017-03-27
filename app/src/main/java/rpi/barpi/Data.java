@@ -13,7 +13,6 @@ public class Data
     public static SharedPreferences saveData;
 
     public static MainActivity mainAct=null;
-
     public static BarActivity barAct=null;
 
     public static int exampleInteger;
