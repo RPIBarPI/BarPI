@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class BarActivity extends AppCompatActivity
 {
-    Bar bar=Data.bars.get(Data.mainAct.contextMenuItemSelected);
+    public Bar bar=Data.bars.get(Data.mainAct.contextMenuItemSelected);
     ListView lvEvents;
     ArrayAdapter<Event> appAdapter=null;
     public int contextMenuItemSelected = -1;
@@ -31,7 +31,7 @@ public class BarActivity extends AppCompatActivity
         //Set event gui objects
         lvEvents=(ListView)findViewById(R.id.eventListView);
         //Set the lv array
-        appAdapter = new ArrayAdapter<Event>(this, android.R.layout.simple_list_item_1, Bar.events);
+        appAdapter = new ArrayAdapter<Event>(this, android.R.layout.simple_list_item_1, bar.events);
         lvEvents.setAdapter(appAdapter);
 
         // Long click event
@@ -48,10 +48,10 @@ public class BarActivity extends AppCompatActivity
         });
 
         //test data
-        Bar.events.clear();
-        Bar.events.add(new Event(0, "Ladies' Night", "$1 Well drinks for ladies"));
-        Bar.events.add(new Event(1, "$3 PBR Pitchers", "From 6-8pm"));
-        Bar.events.add(new Event(2, "Buy-one-get-one", "Mondays: 10-11pm"));
+        bar.events.clear();
+        bar.events.add(new Event(0, "Ladies' Night", "$1 Well drinks for ladies"));
+        bar.events.add(new Event(1, "$3 PBR Pitchers", "From 6-8pm"));
+        bar.events.add(new Event(2, "Buy-one-get-one", "Mondays: 10-11pm"));
     }
 
     public void rateBar(View v)
