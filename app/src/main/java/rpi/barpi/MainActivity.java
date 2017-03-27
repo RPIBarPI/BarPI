@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity
 
         //connect to the server
         ArrayList<String> data=new ArrayList<String>();
+        data.add(Data.VERSION);
         data.add("CONNECT");
 
         Sockets.connect(data);
