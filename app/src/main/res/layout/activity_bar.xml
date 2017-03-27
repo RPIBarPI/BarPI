@@ -10,44 +10,52 @@
         android:id="@+id/ba_rating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/ba_btnstarone"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:text="*"
-            android:onClick="rateBar" />
+            android:onClick="rateBar"
+            android:text="*" />
 
         <Button
             android:id="@+id/ba_btnstartwo"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:text="*"
-            android:onClick="rateBar" />
+            android:onClick="rateBar"
+            android:text="*" />
 
         <Button
             android:id="@+id/ba_btnstarthree"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:text="*"
-            android:onClick="rateBar" />
+            android:onClick="rateBar"
+            android:text="*" />
 
         <Button
             android:id="@+id/ba_btnstarfour"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:text="*"
-            android:onClick="rateBar" />
+            android:onClick="rateBar"
+            android:text="*" />
 
         <Button
             android:id="@+id/ba_btnstarfive"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:text="*"
-            android:onClick="rateBar" />
+            android:onClick="rateBar"
+            android:text="*" />
 
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/eventListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ba_rating" />
 
 </RelativeLayout>
