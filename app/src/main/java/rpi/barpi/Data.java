@@ -14,6 +14,8 @@ public class Data
 
     public static MainActivity mainAct=null;
 
+    public static BarActivity barAct=null;
+
     public static int exampleInteger;
 
     public static ArrayList<Bar> bars=new ArrayList<Bar>();

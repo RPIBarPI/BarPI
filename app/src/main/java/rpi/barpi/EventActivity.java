@@ -6,8 +6,8 @@ package rpi.barpi;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class EventActivity extends BarActivity {
-    Event event = Bar.events.get(Bar.barAct.contextMenuItemSelected);
+public class EventActivity extends AppCompatActivity {
+    Event event = Bar.events.get(Data.barAct.contextMenuItemSelected);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -23,7 +23,7 @@ public class BarActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar);
 
-        Bar.barAct=this;
+        Data.barAct=this;
 
         //set the title
         setTitle(bar.getName());
@@ -39,6 +39,7 @@ public class BarActivity extends AppCompatActivity
         // Click event
         final BarActivity tempThis=this;
         lvEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            // Very similar to setup of MainActivity from commit w/ message "Added BarActivity and gradle update"
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 tempThis.contextMenuItemSelected = position;

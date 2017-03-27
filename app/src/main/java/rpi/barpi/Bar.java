@@ -12,8 +12,6 @@ public class Bar //basic information on bars
     public static ArrayList<Event> events=new ArrayList<Event>();//includes specials
     public ArrayList<Drink> drinks=new ArrayList<Drink>();//the menu
 
-    public static BarActivity barAct=null;
-
     //constructors
     public Bar(int newID, String newName, float newRating, Location newLocation)
     {

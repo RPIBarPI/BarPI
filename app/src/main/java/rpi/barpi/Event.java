@@ -36,4 +36,14 @@ public class Event
 
     //other
     public Boolean isSpecial() { return false; }
+
+    @Override
+    public String toString() {
+        String retVal="";
+
+        //the name
+        retVal+=name+'\n';
+        retVal+="Event description blah blah blah";
+        return retVal;
+    }
 }
