@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class Sockets
 {
     private static Socket sock;
-    private static final String serverIP="192.168.1.170";
-    private static final int mainPort=45019;
+    private static final String serverIP="129.161.77.11";
+    private static final int mainPort=42069;
     private static DataOutputStream out;
     private static DataInputStream in;
 
