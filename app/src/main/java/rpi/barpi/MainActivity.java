@@ -13,10 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.EditText;
-import android.text.Editable;
-import java.util.Arrays;
-import android.text.TextWatcher;
 
 import java.util.ArrayList;
 

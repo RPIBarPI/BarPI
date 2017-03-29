@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Iterator;
 
 
 /**
@@ -17,10 +17,8 @@ import java.util.Arrays;
  */
 
 public class SearchActivity extends AppCompatActivity {
-    //Bar bar = Data.bars.get(Data.mainAct.contextMenuItemSelected);
-    String[] items;
-    ArrayList<String> listItems;
-    ArrayAdapter<String> adapter;
+    ArrayList<Bar> listItems=new ArrayList<Bar>(Data.bars);
+    ArrayAdapter<Bar> adapter;
     ListView listView;
     EditText editText;
 
@@ -33,7 +31,8 @@ public class SearchActivity extends AppCompatActivity {
 
         editText = (EditText) findViewById(R.id.txtsearch);
 
-        initList();
+        adapter = new ArrayAdapter<Bar>(this, R.layout.list_item, R.id.txtitem, listItems);
+        listView.setAdapter(adapter);
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -46,7 +45,8 @@ public class SearchActivity extends AppCompatActivity {
                     count) {
                 if (s.toString().equals("")) {
                     // reset listview
-                    initList();
+                    listItems=new ArrayList<Bar>(Data.bars);
+                    adapter.notifyDataSetChanged();
                 } else {
                     // perform search
                     searchItem(s.toString());
@@ -60,25 +60,17 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    public void searchItem(String textToSearch) {
-        for (String item : items) {
-            if (!item.contains(textToSearch)) {
-                listItems.remove(item);
-            }
+    public void searchItem(String textToSearch)
+    {
+        Iterator<Bar> itr=listItems.iterator();
+        textToSearch=textToSearch.toLowerCase();
+        while(itr.hasNext())
+        {
+            Bar item=itr.next();
+            if((!item.getName().toLowerCase().contains(textToSearch)) &&
+                    (!item.getDescription().toLowerCase().contains(textToSearch)))
+                itr.remove();
         }
         adapter.notifyDataSetChanged();
     }
-
-    public void initList() {
-        items = new String[]{"Bar Troy", "Ruck", "Olearys", "Union Pub"};
-        listItems = new ArrayList<>(Arrays.asList(items));
-
-        adapter = new ArrayAdapter<String>(this,
-                R.layout.list_item, R.id.txtitem, listItems);
-
-        listView.setAdapter(adapter);
-
-    }
 }
-
-
