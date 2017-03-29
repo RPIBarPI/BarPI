@@ -29,6 +29,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
         <activity
             android:name=".SearchActivity"
             android:parentActivityName=".MainActivity"
@@ -40,6 +41,15 @@
 
         <activity
             android:name=".EventActivity"
+            android:parentActivityName=".BarActivity"
+            android:label="Event" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".BarActivity" />
+        </activity>
+
+        <activity
+            android:name=".BarChatActivity"
             android:parentActivityName=".BarActivity"
             android:label="Event" >
             <meta-data

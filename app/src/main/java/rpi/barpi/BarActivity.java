@@ -3,6 +3,9 @@ package rpi.barpi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -52,6 +55,33 @@ public class BarActivity extends AppCompatActivity
         bar.events.add(new Event(0, "Ladies' Night", "$1 Well drinks for ladies"));
         bar.events.add(new Event(1, "$3 PBR Pitchers", "From 6-8pm"));
         bar.events.add(new Event(2, "Buy-one-get-one", "Mondays: 10-11pm"));
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        Data.barAct=null;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater=getMenuInflater();
+        inflater.inflate(R.menu.barchat_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        int id=item.getItemId();
+        if(id == R.id.bar_chat)
+        {
+            startActivity(new Intent(this, BarChatActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void rateBar(View v)
