@@ -68,15 +68,10 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> data=new ArrayList<String>();
         data.add(Data.VERSION);
         data.add("CONNECT");
+        if(Data.regUserID > 0) data.add(Integer.toString(Data.regUserID));
+        else data.add("0");
 
         Sockets.connect(data);
-
-        //test data
-        Data.bars.clear();
-        Data.bars.add(new Bar(0, "Bar Troy", 0.0f, new Location()));
-        Data.bars.add(new Bar(1, "The Ruck", 0.0f, new Location()));
-        Data.bars.add(new Bar(2, "Olearys", 0.0f, new Location()));
-        Data.bars.add(new Bar(3, "Union Pub", 0.0f, new Location()));
     }
 
     @Override

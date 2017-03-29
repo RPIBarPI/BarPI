@@ -14,8 +14,9 @@ public class Data
 
     public static MainActivity mainAct=null;
     public static BarActivity barAct=null;
+    //public static BarChatActivity barChatAct=null;
 
-    public static int exampleInteger;
+    public static int regUserID;
 
     public static ArrayList<Bar> bars=new ArrayList<Bar>();
 
@@ -28,14 +29,44 @@ public class Data
 
     private static void loadData()
     {
-        exampleInteger=saveData.getInt("exampleinteger", -1);
+        regUserID=saveData.getInt("regUserID", -1);
     }
 
     public static void saveData()
     {
         SharedPreferences.Editor SDEditor=saveData.edit();
-        SDEditor.putInt("exampleinteger", exampleInteger);
+        SDEditor.putInt("regUserID", regUserID);
         SDEditor.apply();
     }
 
+
+    public static void addBar(final Bar newBar)
+    {
+        if(mainAct != null)
+        {
+            mainAct.runOnUiThread(new Runnable()
+            {
+                public void run()
+                {
+                    bars.add(newBar);
+                    mainAct.appAdapter.notifyDataSetChanged();
+                }
+            });
+        }
+    }
+
+    public static void addMessage(final int index, final Message newMsg)
+    {
+        /*if(barChatAct != null)
+        {
+            barChatAct.runOnUiThread(new Runnable()
+            {
+                public void run()
+                {
+                    bars.get(index).messages.add(newMsg);
+                }
+            });
+            barChatAct.appAdapter.notifyDataSetChanged();
+        }*/
+    }
 }

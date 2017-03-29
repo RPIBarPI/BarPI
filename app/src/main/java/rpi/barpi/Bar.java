@@ -6,17 +6,19 @@ public class Bar //basic information on bars
 {
     private int id=0;
     private String name="";
+    private String description="";
     private float rating;
-    public ArrayList<Comment> comments=new ArrayList<Comment>();
+    public ArrayList<Message> messages =new ArrayList<Message>();
     private Location location=new Location();
     public ArrayList<Event> events=new ArrayList<Event>();//includes specials
     public ArrayList<Drink> drinks=new ArrayList<Drink>();//the menu
 
     //constructors
-    public Bar(int newID, String newName, float newRating, Location newLocation)
+    public Bar(int newID, String newName, String newDescription, float newRating, Location newLocation)
     {
         id=newID;
         name=newName;
+        description=newDescription;
         rating=newRating;
         location=new Location(newLocation);//Using value not ref
     }
@@ -24,11 +26,13 @@ public class Bar //basic information on bars
     //gets
     public int getID() { return id; }
     public String getName() { return name; }
+    public String getDescription() { return description; }
     public float getRating() { return rating; }
     public Location getLocation() { return location; }
 
     //sets
     public void setName(String newName) { name=newName; }
+    public void setDescription(String newDescription) { description=newDescription; }
     public void setRating(float newRating) { rating=newRating; }
     public void setLocation(Location newLocation) { location=newLocation; }
 
@@ -40,7 +44,7 @@ public class Bar //basic information on bars
 
         //the name
         retVal+=name+'\n';
-        retVal+="Located at dfijhfdg";
+        retVal+=description;
 
         return retVal;
     }
