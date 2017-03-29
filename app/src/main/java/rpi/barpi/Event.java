@@ -7,7 +7,7 @@ public class Event
     private int id=-1;
     private String name="";
     private String description="";
-    public ArrayList<Comment> comments=new ArrayList<Comment>();
+    public ArrayList<Message> messages =new ArrayList<Message>();
 
     //constructors
     public Event()
@@ -15,7 +15,7 @@ public class Event
         id=-1;
         name="";
         description="";
-        comments=new ArrayList<Comment>();
+        messages =new ArrayList<Message>();
     }
 
     public Event(int newID, String newName, String newDescription)

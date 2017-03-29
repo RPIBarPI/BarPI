@@ -7,11 +7,14 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Sockets
 {
     private static Socket sock;
-    private static final String serverIP="129.161.77.11";
+    private static final String serverIP="192.168.1.170";
     private static final int mainPort=42069;
     private static DataOutputStream out;
     private static DataInputStream in;
@@ -37,8 +40,7 @@ public class Sockets
 
         protected void onPostExecute(ArrayList<String> res)
         {
-            /*if(res.size() == 0) Data.mainAct.loginFailed();
-            else Data.mainAct.loginSuccessful(res);*/
+            if(res.size() != 0) readEngine();//success
         }
     }
 
@@ -67,6 +69,84 @@ public class Sockets
                 else if(command.equals("I"))//Initial User data
                 {
                     //
+                }
+                else if(command.equals("B"))//Bar data
+                {
+                    //determine based on the id whether to update an existing
+                    //bar or make a new one
+                    //B|accountid|field|value|...|...\|
+                    if(data.size() < 3) continue;
+
+                    try
+                    {
+                        //get the account id
+                        int barid=Integer.parseInt(data.get(0));
+
+                        //get the other fields
+                        Map<String, String> fieldData=new HashMap<String, String>();
+
+                        for(int i=1;i<data.size();i+=2)
+                            fieldData.put(data.get(i), data.get(i+1));
+
+                        //set the fields
+                        String newName="";
+                        String newDescription="";
+                        float newRating=0.0f;
+                        String newAptNo="";
+                        String newStreet="";
+                        String newCity="";
+                        String newState="";
+                        String newZip="";
+                        String newCountry="";
+
+                        Iterator it=fieldData.entrySet().iterator();
+                        while(it.hasNext())
+                        {
+                            Map.Entry pair=(Map.Entry)it.next();
+
+                            if(pair.getKey().equals("name")) newName=pair.getValue().toString();
+                            if(pair.getKey().equals("description")) newDescription=pair.getValue().toString();
+                            if(pair.getKey().equals("rating")) newRating=Float.parseFloat(pair.getValue().toString());
+                            if(pair.getKey().equals("aptno")) newAptNo=pair.getValue().toString();
+                            if(pair.getKey().equals("street")) newStreet=pair.getValue().toString();
+                            if(pair.getKey().equals("city")) newCity=pair.getValue().toString();
+                            if(pair.getKey().equals("state")) newState=pair.getValue().toString();
+                            if(pair.getKey().equals("zip")) newZip=pair.getValue().toString();
+                            if(pair.getKey().equals("country")) newCountry=pair.getValue().toString();
+                        }
+
+                        boolean newBar=true;
+                        int barIndex=-1;
+                        for(int i=0;i<Data.bars.size();++i)
+                        {
+                            if(barid == Data.bars.get(i).getID())
+                            {
+                                barIndex=i;
+                                newBar=false;
+                                break;
+                            }
+                        }
+
+                        if(newBar)
+                        {
+                            Bar bar=new Bar(barid, newName, newDescription, newRating,
+                                    new Location(newAptNo, newStreet, newCity, newState, newZip, newCountry));
+                            Data.addBar(bar);
+                        }
+                        else//edit an existing bar
+                        {
+                            if(!newName.isEmpty()) Data.bars.get(barIndex).setName(newName);
+                            if(!newDescription.isEmpty()) Data.bars.get(barIndex).setDescription(newDescription);
+                            if(newRating > 0.0f) Data.bars.get(barIndex).setRating(newRating);
+                            if(!newAptNo.isEmpty()) Data.bars.get(barIndex).getLocation().setAptsuite(newAptNo);
+                            if(!newStreet.isEmpty()) Data.bars.get(barIndex).getLocation().setStreet(newStreet);
+                            if(!newCity.isEmpty()) Data.bars.get(barIndex).getLocation().setCity(newCity);
+                            if(!newState.isEmpty()) Data.bars.get(barIndex).getLocation().setState(newState);
+                            if(!newZip.isEmpty()) Data.bars.get(barIndex).getLocation().setZip(newZip);
+                            if(!newCountry.isEmpty()) Data.bars.get(barIndex).getLocation().setCountry(newCountry);
+                        }
+                    }
+                    catch(NumberFormatException ex) { }
                 }
             }
             return null;
