@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,10 +20,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ListView lvbars;
-    ArrayAdapter<Bar> appAdapter = null;
+    BarAdapter appAdapter = null;
     public int contextMenuItemSelected = -1;
-
-
 
 
 
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         lvbars = (ListView) findViewById(R.id.barListView);
 
         //set the lvs array
-        appAdapter = new ArrayAdapter<Bar>(this, android.R.layout.simple_list_item_1, Data.bars);
+        appAdapter = new BarAdapter(this, R.layout.activity_main, Data.bars);
         lvbars.setAdapter(appAdapter);
 
         //long click event
@@ -61,13 +60,19 @@ public class MainActivity extends AppCompatActivity {
 
         //ArrayList<String> data = new ArrayList<String>();
 
-        ArrayList<String> data=new ArrayList<String>();
-        data.add(Data.VERSION);
+        /*ArrayList<String> data=new ArrayList<String>();
+        /*data.add(Data.VERSION);
         data.add("CONNECT");
         if(Data.regUserID > 0) data.add(Integer.toString(Data.regUserID));
         else data.add("0");
 
-        Sockets.connect(data);
+        Sockets.connect(data);*/
+        Data.bars.clear();
+        Data.bars.add(new Bar(0, "Bar Troy", "Blah blah again", 0, new Location()));
+        Data.bars.add(new Bar(1, "Ruck", "Blah blah", 0, new Location()));
+        Data.bars.add(new Bar(2, "Olearys", "Description here also", 0, new Location()));
+        Data.bars.add(new Bar(3, "Union Pub", "Description here", 0, new Location()));
+
     }
 
     @Override
