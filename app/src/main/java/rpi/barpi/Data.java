@@ -14,7 +14,7 @@ public class Data
 
     public static MainActivity mainAct=null;
     public static BarActivity barAct=null;
-    //public static BarChatActivity barChatAct=null;
+    public static BarChatActivity barChatAct=null;
 
     public static int regUserID;
 
@@ -55,18 +55,33 @@ public class Data
         }
     }
 
-    public static void addMessage(final int index, final Message newMsg)
+    public static void addMessage(final int barIndex, final int eventid, final Message newMsg)
     {
-        /*if(barChatAct != null)
+        if(barChatAct != null)
         {
             barChatAct.runOnUiThread(new Runnable()
             {
                 public void run()
                 {
-                    bars.get(index).messages.add(newMsg);
+                    if(eventid == 0)
+                    {
+                        bars.get(barIndex).messages.add(newMsg);
+                        barChatAct.appAdapter.notifyDataSetChanged();
+                    }
+                    else
+                    {
+                        for(int i=0;i<bars.get(barIndex).events.size();++i)
+                        {
+                            if(eventid == bars.get(barIndex).events.get(i).getID())
+                            {
+                                bars.get(barIndex).events.get(i).messages.add(newMsg);
+                                //eventChatAct.appAdapter.notifyDataSetChanged();
+                                break;
+                            }
+                        }
+                    }
                 }
             });
-            barChatAct.appAdapter.notifyDataSetChanged();
-        }*/
+        }
     }
 }
