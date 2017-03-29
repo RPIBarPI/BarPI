@@ -1,6 +1,6 @@
 package rpi.barpi;
 
-public class Comment
+public class Message
 {
     private int id=-1;
     private String ip="";
@@ -8,7 +8,7 @@ public class Comment
     private int timestamp=0;
 
     //constructor
-    public Comment(int newID, String newIP, String newComment, int newTimestamp)
+    public Message(int newID, String newIP, String newComment, int newTimestamp)
     {
         id=newID;
         ip=newIP;
