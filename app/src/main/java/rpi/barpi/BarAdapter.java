@@ -50,7 +50,7 @@ public class BarAdapter extends ArrayAdapter<Bar> {
             if(Data.bars.get(i).getID() == currentBar.getID()) {
                 barName = Data.bars.get(i).getName();
                 barL = Data.bars.get(i).getLocation();
-                barLocation = barL.getAptsuite()+ " oh herro "+ barL.getStreet();
+                barLocation = barL.getAptsuite()+ " TBD "+ barL.getStreet();
                 break;
             }
 
