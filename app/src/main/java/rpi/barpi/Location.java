@@ -55,4 +55,23 @@ public class Location
     public void setState(String newState) { state=newState; }
     public void setZip(String newZip) { zip=newZip; }
     public void setCountry(String newCountry) { country=newCountry; }
+
+    @Override
+    public String toString()
+    {
+        String retVal="";
+
+        //the name
+        if (!aptsuite.isEmpty()) retVal+=aptsuite+'\n';
+        if (!street.isEmpty()) retVal+=street+'\n';
+        if (!city.isEmpty()) retVal+=city+", ";
+        if (!state.isEmpty()) retVal+=state+' ';
+        if (!zip.isEmpty()) retVal+=zip;
+
+        if (retVal.isEmpty()) {
+            retVal = "No location provided";
+        }
+
+        return retVal;
+    }
 }
