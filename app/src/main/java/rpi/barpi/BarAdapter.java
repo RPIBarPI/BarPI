@@ -3,6 +3,7 @@ package rpi.barpi;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.widget.ArrayAdapter;
 import android.app.Activity;
 import android.content.Context;
@@ -62,7 +63,7 @@ public class BarAdapter extends ArrayAdapter<Bar> {
         if (position%2 == 1)
             view.setBackgroundColor(Color.WHITE);
         else
-            view.setBackgroundColor(Color.rgb(0xf6, 0xd6, 0xd6));//red-ish
+            view.setBackgroundColor(ResourcesCompat.getColor(view.getResources(), R.color.colorRedish, null));//red-ish
 
         return view;
     }

@@ -3,6 +3,7 @@ package rpi.barpi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ public class BarChatAdapter extends ArrayAdapter<Message>
         if (position%2 == 1)
             view.setBackgroundColor(Color.WHITE);
         else
-            view.setBackgroundColor(Color.rgb(0xFF, 0x00, 0x00));//red
+            view.setBackgroundColor(ResourcesCompat.getColor(view.getResources(), R.color.colorRedish, null));//red-ish
 
         return view;
     }
