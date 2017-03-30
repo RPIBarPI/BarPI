@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,10 +20,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ListView lvbars;
-    ArrayAdapter<Bar> appAdapter = null;
+    BarAdapter appAdapter = null;
     public int contextMenuItemSelected = -1;
-
-
 
 
 
@@ -36,11 +35,11 @@ public class MainActivity extends AppCompatActivity {
 
         Data.mainAct = this;
 
-        //set the gui objects
+        //set the gui objects. Inflates activity_main
         lvbars = (ListView) findViewById(R.id.barListView);
 
         //set the lvs array
-        appAdapter = new ArrayAdapter<Bar>(this, android.R.layout.simple_list_item_1, Data.bars);
+        appAdapter = new BarAdapter(this, R.layout.bar_row_layout, Data.bars);
         lvbars.setAdapter(appAdapter);
 
         //long click event
@@ -68,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
         else data.add("0");
 
         Sockets.connect(data);
+
+        /*Data.bars.clear();
+        Data.addBar(new Bar(0, "Bar Troy", "Blah blah again", 0, new Location()));
+        Data.addBar(new Bar(1, "Ruck", "Blah blah", 0, new Location()));
+        Data.addBar(new Bar(2, "Olearys", "Description here also", 0, new Location()));
+        Data.addBar(new Bar(3, "Union Pub", "Description here", 0, new Location()));*/
+
     }
 
     @Override
