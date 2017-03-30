@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -17,7 +18,7 @@ public class BarActivity extends AppCompatActivity
 {
     public Bar bar=Data.bars.get(Data.mainAct.contextMenuItemSelected);
     ListView lvEvents;
-    ArrayAdapter<Event> appAdapter=null;
+    EventAdapter appAdapter=null;
     public int contextMenuItemSelected = -1;
 
     @Override
@@ -34,8 +35,10 @@ public class BarActivity extends AppCompatActivity
         //Set event gui objects
         lvEvents=(ListView)findViewById(R.id.eventListView);
         //Set the lv array
-        appAdapter = new ArrayAdapter<Event>(this, android.R.layout.simple_list_item_1, bar.events);
+        appAdapter = new EventAdapter(this, R.layout.event_row_layout, bar.events);
         lvEvents.setAdapter(appAdapter);
+        TextView barDesc = (TextView)findViewById(R.id.barDescript);
+        barDesc.setText(Data.barAct.bar.getDescription());
 
         // Long click event
         registerForContextMenu(lvEvents);
@@ -88,13 +91,13 @@ public class BarActivity extends AppCompatActivity
     {
         int rating=0;//doesnt need to be a float, you cant do half stars or fractions
 
-        if(v.getId() == R.id.ba_btnstarone) rating=1;
+        /*if(v.getId() == R.id.ba_btnstarone) rating=1;
         else if(v.getId() == R.id.ba_btnstartwo) rating=2;
         else if(v.getId() == R.id.ba_btnstarthree) rating=3;
         else if(v.getId() == R.id.ba_btnstarfour) rating=4;
         else if(v.getId() == R.id.ba_btnstarfive) rating=5;
 
-        if((rating < 1) || (rating > 5)) return;
+        if((rating < 1) || (rating > 5)) return;*/
 
         //tell the server
         /*ArrayList<String> data=new ArrayList<String>();

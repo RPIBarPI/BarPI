@@ -43,7 +43,7 @@ public class Event
 
         //the name
         retVal+=name+'\n';
-        retVal+="Event description blah blah blah";
+        retVal+=description;
         return retVal;
     }
 }
