@@ -45,8 +45,10 @@ public class SearchActivity extends AppCompatActivity {
                     count) {
                 if (s.toString().equals("")) {
                     // reset listview
-                    listItems=new ArrayList<Bar>(Data.bars);
-                    adapter.notifyDataSetChanged();
+                    initList();
+                    //listItems=new ArrayList<Bar>(Data.bars);
+                    //adapter.notifyDataSetChanged();
+
                 } else {
                     // perform search
                     searchItem(s.toString());
@@ -73,4 +75,11 @@ public class SearchActivity extends AppCompatActivity {
         }
         adapter.notifyDataSetChanged();
     }
+
+    public void initList(){
+        listItems=new ArrayList<Bar>(Data.bars);
+        adapter = new ArrayAdapter<Bar>(this, R.layout.list_item, R.id.txtitem, listItems);
+        listView.setAdapter(adapter);
+    }
+
 }
