@@ -37,7 +37,7 @@ public class BarChatAdapter extends ArrayAdapter<Message>
         TextView sender=(TextView)view.findViewById(R.id.msg_sender);
         TextView message=(TextView)view.findViewById(R.id.msg_message);
 
-        String senderName="Name";
+        String senderName="Anon";
 
         sender.setText(senderName);
         message.setText(currentMsg.getComment());
