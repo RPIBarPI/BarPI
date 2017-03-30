@@ -35,6 +35,7 @@ public class Bar //basic information on bars
     public void setDescription(String newDescription) { description=newDescription; }
     public void setRating(float newRating) { rating=newRating; }
     public void setLocation(Location newLocation) { location=newLocation; }
+    public void setMessages(ArrayList<Message> newMsgs) { messages=new ArrayList<Message>(newMsgs); }//make a copy
 
     //other
     @Override

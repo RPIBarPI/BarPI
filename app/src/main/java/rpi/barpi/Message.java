@@ -22,5 +22,14 @@ public class Message
     public String getComment() { return comment; }
     public int getTimestamp() { return timestamp; }
 
-    //no sets
+    @Override
+    public String toString()
+    {
+        return comment;
+    }
+
+    public String saveFormat()
+    {
+        return Integer.toString(id)+"|"+ip+"|"+Integer.toString(timestamp)+"|"+comment;
+    }
 }

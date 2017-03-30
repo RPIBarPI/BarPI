@@ -148,6 +148,32 @@ public class Sockets
                     }
                     catch(NumberFormatException ex) { }
                 }
+                else if(command.equals("C"))//Chat message
+                {
+                    if(data.size() < 6) continue;
+
+                    //get the bar id
+                    int barid=Integer.parseInt(data.get(0));
+                    //get the event id
+                    int eventid=Integer.parseInt(data.get(1));
+                    //get the sender id
+                    int uid=Integer.parseInt(data.get(2));
+                    //get the sender ip
+                    String ip=data.get(3);
+                    //get the timestamp
+                    int timestamp=Integer.parseInt(data.get(4));
+                    //get the message
+                    String message=data.get(5);
+
+                    for(int i=0;i<Data.bars.size();++i)
+                    {
+                        if(barid == Data.bars.get(i).getID())
+                        {
+                            Data.addMessage(i, eventid, new Message(uid, ip, message, timestamp));
+                            break;
+                        }
+                    }
+                }
             }
             return null;
         }
