@@ -41,24 +41,16 @@ public class BarAdapter extends ArrayAdapter<Bar> {
         TextView barTitle = (TextView)view.findViewById(R.id.bar_title);
         TextView barLoc = (TextView)view.findViewById(R.id.bar_location);
 
-        String barName="";
-        String barLocation="";
-        Location barL;
-
         // Go thru all bars in list to lay them out
         for (int i=0; i<Data.bars.size(); ++i) {
             if(Data.bars.get(i).getID() == currentBar.getID()) {
-                barName = Data.bars.get(i).getName();
-                barL = Data.bars.get(i).getLocation();
-                barLocation = barL.getAptsuite()+ " TBD "+ barL.getStreet();
+                //img.setImageDrawable(Drawable);
+                barTitle.setText(Data.bars.get(i).getName());
+                barLoc.setText(Data.bars.get(i).getLocation().toString());
                 break;
             }
 
         }
-
-        //img.setImageDrawable(Drawable);
-        barTitle.setText(barName);
-        barLoc.setText(barLocation);
 
         if (position%2 == 1)
             view.setBackgroundColor(Color.WHITE);
