@@ -34,7 +34,7 @@ public class BarAdapter extends ArrayAdapter<Bar> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater=(LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view=inflater.inflate(resource, null);
-        //Bar currentBar=bars.get(position);
+        Bar currentBar=bars.get(position);
 
         ImageView img = (ImageView)view.findViewById(R.id.bar_img);
         TextView barTitle = (TextView)view.findViewById(R.id.bar_title);
@@ -46,19 +46,23 @@ public class BarAdapter extends ArrayAdapter<Bar> {
 
         // Go thru all bars in list to lay them out
         for (int i=0; i<Data.bars.size(); ++i) {
-            barName = Data.bars.get(i).getName();
-            barL = Data.bars.get(i).getLocation();
-            //barLocation = barL.getAptsuite()+ ' '+ barL.getStreet();
+            if(Data.bars.get(i).getID() == currentBar.getID()) {
+                barName = Data.bars.get(i).getName();
+                barL = Data.bars.get(i).getLocation();
+                barLocation = barL.getAptsuite()+ " oh herro "+ barL.getStreet();
+                break;
+            }
 
-            //img.setImageDrawable(Drawable);
-            barTitle.setText(barName);
-            //barLoc.setText(barLocation);
-
-            if (position%2 == 1)
-                view.setBackgroundColor(Color.WHITE);
-            else
-                view.setBackgroundColor(Color.rgb(0xFF, 0x00, 0x00));//red
         }
+
+        //img.setImageDrawable(Drawable);
+        barTitle.setText(barName);
+        barLoc.setText(barLocation);
+
+        if (position%2 == 1)
+            view.setBackgroundColor(Color.WHITE);
+        else
+            view.setBackgroundColor(Color.rgb(0xf6, 0xd6, 0xd6));//red-ish
 
         return view;
     }
