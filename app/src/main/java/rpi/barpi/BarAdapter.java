@@ -33,7 +33,7 @@ public class BarAdapter extends ArrayAdapter<Bar> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater=(LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view=inflater.inflate(R.layout.bar_row_layout, null);
+        View view=inflater.inflate(resource, null);
         //Bar currentBar=bars.get(position);
 
         ImageView img = (ImageView)view.findViewById(R.id.bar_img);

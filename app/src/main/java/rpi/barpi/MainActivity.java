@@ -35,11 +35,11 @@ public class MainActivity extends AppCompatActivity {
 
         Data.mainAct = this;
 
-        //set the gui objects
+        //set the gui objects. Inflates activity_main
         lvbars = (ListView) findViewById(R.id.barListView);
 
         //set the lvs array
-        appAdapter = new BarAdapter(this, R.layout.activity_main, Data.bars);
+        appAdapter = new BarAdapter(this, R.layout.bar_row_layout, Data.bars);
         lvbars.setAdapter(appAdapter);
 
         //long click event
@@ -60,18 +60,18 @@ public class MainActivity extends AppCompatActivity {
 
         //ArrayList<String> data = new ArrayList<String>();
 
-        /*ArrayList<String> data=new ArrayList<String>();
-        /*data.add(Data.VERSION);
+        ArrayList<String> data=new ArrayList<String>();
+        data.add(Data.VERSION);
         data.add("CONNECT");
         if(Data.regUserID > 0) data.add(Integer.toString(Data.regUserID));
         else data.add("0");
 
-        Sockets.connect(data);*/
-        Data.bars.clear();
-        Data.bars.add(new Bar(0, "Bar Troy", "Blah blah again", 0, new Location()));
-        Data.bars.add(new Bar(1, "Ruck", "Blah blah", 0, new Location()));
-        Data.bars.add(new Bar(2, "Olearys", "Description here also", 0, new Location()));
-        Data.bars.add(new Bar(3, "Union Pub", "Description here", 0, new Location()));
+        Sockets.connect(data);
+        /*Data.bars.clear();
+        Data.addBar(new Bar(0, "Bar Troy", "Blah blah again", 0, new Location()));
+        Data.addBar(new Bar(1, "Ruck", "Blah blah", 0, new Location()));
+        Data.addBar(new Bar(2, "Olearys", "Description here also", 0, new Location()));
+        Data.addBar(new Bar(3, "Union Pub", "Description here", 0, new Location()));*/
 
     }
 
