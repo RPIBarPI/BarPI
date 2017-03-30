@@ -24,13 +24,13 @@ public class EventActivity extends AppCompatActivity {
     {
         int rating=0;//doesnt need to be a float, you cant do half stars or fractions
 
-        if(v.getId() == R.id.ea_btnstarone) rating=1;
+        /*if(v.getId() == R.id.ea_btnstarone) rating=1;
         else if(v.getId() == R.id.ea_btnstartwo) rating=2;
         else if(v.getId() == R.id.ea_btnstarthree) rating=3;
         else if(v.getId() == R.id.ea_btnstarfour) rating=4;
         else if(v.getId() == R.id.ea_btnstarfive) rating=5;
 
-        if((rating < 1) || (rating > 5)) return;
+        if((rating < 1) || (rating > 5)) return;*/
 
         //tell the server
         /*ArrayList<String> data=new ArrayList<String>();
