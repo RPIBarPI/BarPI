@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         else data.add("0");
 
         Sockets.connect(data);
+
         /*Data.bars.clear();
         Data.addBar(new Bar(0, "Bar Troy", "Blah blah again", 0, new Location()));
         Data.addBar(new Bar(1, "Ruck", "Blah blah", 0, new Location()));

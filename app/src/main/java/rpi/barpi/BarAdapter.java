@@ -43,9 +43,9 @@ public class BarAdapter extends ArrayAdapter<Bar> {
         String barName="";
         String barLocation="";
         Location barL;
-        int x =1;
+
         // Go thru all bars in list to lay them out
-        for (int i=0; i<Data.bars.size(); ++x) {
+        for (int i=0; i<Data.bars.size(); ++i) {
             barName = Data.bars.get(i).getName();
             barL = Data.bars.get(i).getLocation();
             //barLocation = barL.getAptsuite()+ ' '+ barL.getStreet();
@@ -57,9 +57,9 @@ public class BarAdapter extends ArrayAdapter<Bar> {
             if (position%2 == 1)
                 view.setBackgroundColor(Color.WHITE);
             else
-                view.setBackgroundColor(Color.rgb(0xFF, 0xD1, 0xB0));//light white orange
+                view.setBackgroundColor(Color.rgb(0xFF, 0x00, 0x00));//red
         }
 
-        return super.getView(position, convertView, parent);
+        return view;
     }
 }
