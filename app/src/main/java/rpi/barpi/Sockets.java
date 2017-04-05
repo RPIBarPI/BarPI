@@ -92,6 +92,7 @@ public class Sockets
                         String newName="";
                         String newDescription="";
                         float newRating=0.0f;
+                        int timesRated=0;
                         String newAptNo="";
                         String newStreet="";
                         String newCity="";
@@ -107,6 +108,7 @@ public class Sockets
                             if(pair.getKey().equals("name")) newName=pair.getValue().toString();
                             if(pair.getKey().equals("description")) newDescription=pair.getValue().toString();
                             if(pair.getKey().equals("rating")) newRating=Float.parseFloat(pair.getValue().toString());
+                            if(pair.getKey().equals("timesrated")) timesRated=Integer.parseInt(pair.getValue().toString());
                             if(pair.getKey().equals("aptno")) newAptNo=pair.getValue().toString();
                             if(pair.getKey().equals("street")) newStreet=pair.getValue().toString();
                             if(pair.getKey().equals("city")) newCity=pair.getValue().toString();
@@ -126,6 +128,9 @@ public class Sockets
                                 break;
                             }
                         }
+
+                        if(timesRated > 0) newRating/=(float)newRating;
+                        else newRating=0.0f;
 
                         if(newBar)
                         {
