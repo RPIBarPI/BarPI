@@ -19,21 +19,13 @@
     <fragment
         android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:layout_below="@+id/ratingBar"
         class="com.google.android.gms.maps.SupportMapFragment" />
 
-    <!--Place list directly below bar rating line -->
-    <ImageView
-        android:id="@+id/barImage"
-        android:layout_below="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        app:srcCompat="@drawable/bar_background" />
-
     <TextView
         android:id="@+id/barDescript"
-        android:layout_below="@id/barImage"
+        android:layout_below="@id/map"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
