@@ -1,22 +1,32 @@
 package rpi.barpi;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
-public class BarActivity extends AppCompatActivity
+
+public class BarActivity extends AppCompatActivity implements OnMapReadyCallback
 {
     public Bar bar=Data.bars.get(Data.mainAct.contextMenuItemSelected);
+    private SupportMapFragment map=null;
     ListView lvEvents;
     EventAdapter appAdapter=null;
     public int contextMenuItemSelected = -1;
@@ -33,6 +43,9 @@ public class BarActivity extends AppCompatActivity
         setTitle(bar.getName());
 
         //Set event gui objects
+        map=(SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
+        map.getMapAsync(this);
+
         lvEvents=(ListView)findViewById(R.id.eventListView);
         //Set the lv array
         appAdapter = new EventAdapter(this, R.layout.event_row_layout, bar.events);
@@ -85,6 +98,48 @@ public class BarActivity extends AppCompatActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
+    {
+        switch(requestCode)
+        {
+            case 0:
+            {
+                if((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED))
+                {
+                    //permission granted, continue
+                }
+                else//permission denied
+                {
+                    finish();
+                }
+                return;
+            }
+        }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap map)
+    {
+        boolean permSet=false;
+        //permissions
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
+        else
+            permSet=true;
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        else
+            permSet=true;
+
+        if(permSet)
+        {
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(42.727985042, -73.672952073), 16));
+            map.setMyLocationEnabled(true);
+        }
     }
 
     public void rateBar(View v)

@@ -1,1 +1,3 @@
 # BarPI
+Google Maps API Key
+AIzaSyCKSZ8L5lC8jUsypDjUr2SHhBZApQLaYpE
