@@ -51,6 +51,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 } else {
                     // perform search
+                    initList();
                     searchItem(s.toString());
                 }
             }
