@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Data
 {
-    public static final String VERSION="0.01";
+    public static final String VERSION="0.02";
 
     public static boolean initialized=false;
 
