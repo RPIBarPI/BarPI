@@ -8,6 +8,8 @@ public class Location
     private String state="";
     private String zip="";
     private String country="";
+    private float longitude=360.0f;
+    private float latitude=360.0f;
 
     //constructors
     public Location()
@@ -18,9 +20,12 @@ public class Location
         state="";
         zip="";
         country="";
+        longitude=360.0f;
+        latitude=360.0f;
     }
 
-    public Location(String newAptSuite, String newStreet, String newCity, String newState, String newZip, String newCountry)
+    public Location(String newAptSuite, String newStreet, String newCity, String newState, String newZip, String newCountry,
+                    float newLong, float newLat)
     {
         aptsuite=newAptSuite;
         street=newStreet;
@@ -28,6 +33,8 @@ public class Location
         state=newState;
         zip=newZip;
         country=newCountry;
+        longitude=newLong;
+        latitude=newLat;
     }
 
     public Location(Location location2)
@@ -38,6 +45,8 @@ public class Location
         state=location2.state;
         zip=location2.zip;
         country=location2.country;
+        longitude=location2.longitude;
+        latitude=location2.latitude;
     }
 
     //gets
@@ -47,6 +56,8 @@ public class Location
     public String getState() { return state; }
     public String getZip() { return zip; }
     public String getCountry() { return country; }
+    public float getLongitude() { return longitude; }
+    public float getLatitude() { return latitude; }
 
     //sets
     public void setAptsuite(String newAptSuite) { aptsuite=newAptSuite; }
@@ -55,6 +66,8 @@ public class Location
     public void setState(String newState) { state=newState; }
     public void setZip(String newZip) { zip=newZip; }
     public void setCountry(String newCountry) { country=newCountry; }
+    public void setLongitude(float newLong) { longitude=newLong; }
+    public void setLatitude(float newLat) { latitude=newLat; }
 
     @Override
     public String toString()
@@ -68,8 +81,15 @@ public class Location
         if (!state.isEmpty()) retVal+=state+' ';
         if (!zip.isEmpty()) retVal+=zip;
 
-        if (retVal.isEmpty()) {
-            retVal = "No location provided";
+        if(retVal.isEmpty())
+        {
+            if((longitude != 360.0f) && (latitude != 360.0f))
+                retVal+=Float.toString(longitude)+", "+Float.toString(latitude);
+        }
+
+        if(retVal.isEmpty())
+        {
+            retVal="No location provided";
         }
 
         return retVal;
