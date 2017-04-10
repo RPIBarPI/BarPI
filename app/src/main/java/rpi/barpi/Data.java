@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Data
 {
-    public static final String VERSION="0.01";
+    public static final String VERSION="0.02";
 
     public static boolean initialized=false;
 
@@ -29,7 +29,7 @@ public class Data
 
     private static void loadData()
     {
-        regUserID=saveData.getInt("regUserID", -1);
+        regUserID=saveData.getInt("regUserID", 0);
     }
 
     public static void saveData()

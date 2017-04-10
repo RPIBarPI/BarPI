@@ -68,7 +68,13 @@ public class Sockets
                 }
                 else if(command.equals("I"))//Initial User data
                 {
-                    //
+                    if(data.size() < 1) continue;
+
+                    //set the user id
+                    Data.regUserID=Integer.parseInt(data.get(0));
+
+                    //save the id
+                    Data.saveData();
                 }
                 else if(command.equals("B"))//Bar data
                 {
