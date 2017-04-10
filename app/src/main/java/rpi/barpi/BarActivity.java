@@ -137,8 +137,11 @@ public class BarActivity extends AppCompatActivity implements OnMapReadyCallback
 
         if(permSet)
         {
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(42.727985042, -73.672952073), 16));
-            map.setMyLocationEnabled(true);
+            if((bar.getLocation().getLongitude() != 360.0f) && (bar.getLocation().getLatitude() != 360.0f))
+            {
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(bar.getLocation().getLatitude(), bar.getLocation().getLongitude()), 16));
+                map.setMyLocationEnabled(true);
+            }
         }
     }
 
