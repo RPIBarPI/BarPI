@@ -29,7 +29,7 @@ public class Data
 
     private static void loadData()
     {
-        regUserID=saveData.getInt("regUserID", -1);
+        regUserID=saveData.getInt("regUserID", 0);
     }
 
     public static void saveData()
