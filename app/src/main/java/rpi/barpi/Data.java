@@ -49,6 +49,7 @@ public class Data
                 public void run()
                 {
                     bars.add(newBar);
+                    mainAct.barListItems.add(newBar);
                     mainAct.appAdapter.notifyDataSetChanged();
                 }
             });
