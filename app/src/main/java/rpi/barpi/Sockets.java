@@ -59,6 +59,8 @@ public class Sockets
 				/*
 				 * E: Error/logout
 				 * I: Initial data
+				 * B: Bar data
+				 * C: Chat message
 				 */
 
                 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
