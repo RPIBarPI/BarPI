@@ -68,7 +68,13 @@ public class Sockets
                 }
                 else if(command.equals("I"))//Initial User data
                 {
-                    //
+                    if(data.size() < 1) continue;
+
+                    //set the user id
+                    Data.regUserID=Integer.parseInt(data.get(0));
+
+                    //save the id
+                    Data.saveData();
                 }
                 else if(command.equals("B"))//Bar data
                 {
@@ -99,6 +105,8 @@ public class Sockets
                         String newState="";
                         String newZip="";
                         String newCountry="";
+                        float newLong=360.0f;
+                        float newLat=360.0f;
 
                         Iterator it=fieldData.entrySet().iterator();
                         while(it.hasNext())
@@ -115,6 +123,8 @@ public class Sockets
                             if(pair.getKey().equals("state")) newState=pair.getValue().toString();
                             if(pair.getKey().equals("zip")) newZip=pair.getValue().toString();
                             if(pair.getKey().equals("country")) newCountry=pair.getValue().toString();
+                            if(pair.getKey().equals("longitude")) newLong=Float.parseFloat(pair.getValue().toString());
+                            if(pair.getKey().equals("latitude")) newLat=Float.parseFloat(pair.getValue().toString());
                         }
 
                         boolean newBar=true;
@@ -129,13 +139,13 @@ public class Sockets
                             }
                         }
 
-                        if(timesRated > 0) newRating/=(float)newRating;
+                        if(timesRated > 0) newRating/=(float)timesRated;
                         else newRating=0.0f;
 
                         if(newBar)
                         {
                             Bar bar=new Bar(barid, newName, newDescription, newRating,
-                                    new Location(newAptNo, newStreet, newCity, newState, newZip, newCountry));
+                                    new Location(newAptNo, newStreet, newCity, newState, newZip, newCountry, newLong, newLat));
                             Data.addBar(bar);
                         }
                         else//edit an existing bar
@@ -149,6 +159,8 @@ public class Sockets
                             if(!newState.isEmpty()) Data.bars.get(barIndex).getLocation().setState(newState);
                             if(!newZip.isEmpty()) Data.bars.get(barIndex).getLocation().setZip(newZip);
                             if(!newCountry.isEmpty()) Data.bars.get(barIndex).getLocation().setCountry(newCountry);
+                            if(newLong != 360.0f) Data.bars.get(barIndex).setRating(newLong);
+                            if(newLat != 360.0f) Data.bars.get(barIndex).setRating(newLat);
                         }
                     }
                     catch(NumberFormatException ex) { }

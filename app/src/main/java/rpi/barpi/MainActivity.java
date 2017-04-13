@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> data=new ArrayList<String>();
         data.add(Data.VERSION);
         data.add("CONNECT");
-        if(Data.regUserID > 0) data.add(Integer.toString(Data.regUserID));
+        if(Data.regUserID >= 0) data.add(Integer.toString(Data.regUserID));
         else data.add("0");
 
         Sockets.connect(data);
