@@ -61,6 +61,8 @@ public class Sockets
 				 * I: Initial data
 				 * B: Bar data
 				 * C: Chat message
+				 * D: Drink data
+				 * H: Event data
 				 */
 
                 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -82,12 +84,12 @@ public class Sockets
                 {
                     //determine based on the id whether to update an existing
                     //bar or make a new one
-                    //B|accountid|field|value|...|...\|
+                    //B|id|field|value|...|...\|
                     if(data.size() < 3) continue;
 
                     try
                     {
-                        //get the account id
+                        //get the bar id
                         int barid=Integer.parseInt(data.get(0));
 
                         //get the other fields
@@ -192,6 +194,141 @@ public class Sockets
                             break;
                         }
                     }
+                }
+                else if(command.equals("D"))//drinks
+                {
+                    //determine based on the id whether to update an existing
+                    //drink or make a new one
+                    //D|barid|drinkid|field|value|...|...\|
+                    if(data.size() < 4) continue;
+
+                    try
+                    {
+                        //get the bar id
+                        int barid=Integer.parseInt(data.get(0));
+
+                        //get the drink id
+                        int drinkid=Integer.parseInt(data.get(1));
+
+                        //get the other fields
+                        Map<String, String> fieldData=new HashMap<String, String>();
+
+                        for(int i=2;i<data.size();i+=2)
+                            fieldData.put(data.get(i), data.get(i+1));
+
+                        //set the fields
+                        String newName="";
+                        String newDescription="";
+                        float newPrice=0.0f;
+
+                        Iterator it=fieldData.entrySet().iterator();
+                        while(it.hasNext())
+                        {
+                            Map.Entry pair=(Map.Entry)it.next();
+
+                            if(pair.getKey().equals("name")) newName=pair.getValue().toString();
+                            if(pair.getKey().equals("description")) newDescription=pair.getValue().toString();
+                            if(pair.getKey().equals("price")) newPrice=Float.parseFloat(pair.getValue().toString());
+                        }
+
+                        boolean newDrink=true;
+                        int barIndex=-1;
+                        int drinkIndex=-1;
+                        for(int i=0;i<Data.bars.size();++i)
+                        {
+                            if(barid == Data.bars.get(i).getID())
+                            {
+                                barIndex=i;
+                                for(int j=0;j<Data.bars.get(i).drinks.size();++j)
+                                {
+                                    drinkIndex=j;
+                                    newDrink=false;
+                                    break;
+                                }
+                                if(!newDrink) break;
+
+                            }
+                        }
+
+                        if(newDrink)
+                        {
+                            Drink drink=new Drink(drinkid, newName, newDescription, newPrice);
+                            Data.addDrink(barIndex, drink);
+                        }
+                        else//edit an existing drink
+                        {
+                            if(!newName.isEmpty()) Data.bars.get(barIndex).drinks.get(drinkIndex).setName(newName);
+                            if(!newDescription.isEmpty()) Data.bars.get(barIndex).drinks.get(drinkIndex).setDescription(newDescription);
+                            if(newPrice > 0.0f) Data.bars.get(barIndex).drinks.get(drinkIndex).setPrice(newPrice);
+                        }
+                    }
+                    catch(NumberFormatException ex) { }
+                }
+                else if(command.equals("H"))//events
+                {
+                    //determine based on the id whether to update an existing
+                    //event or make a new one
+                    //H|barid|eventid|field|value|...|...\|
+                    if(data.size() < 4) continue;
+
+                    try
+                    {
+                        //get the bar id
+                        int barid=Integer.parseInt(data.get(0));
+
+                        //get the event id
+                        int drinkid=Integer.parseInt(data.get(1));
+
+                        //get the other fields
+                        Map<String, String> fieldData=new HashMap<String, String>();
+
+                        for(int i=2;i<data.size();i+=2)
+                            fieldData.put(data.get(i), data.get(i+1));
+
+                        //set the fields
+                        String newName="";
+                        String newDescription="";
+
+                        Iterator it=fieldData.entrySet().iterator();
+                        while(it.hasNext())
+                        {
+                            Map.Entry pair=(Map.Entry)it.next();
+
+                            if(pair.getKey().equals("name")) newName=pair.getValue().toString();
+                            if(pair.getKey().equals("description")) newDescription=pair.getValue().toString();
+                        }
+
+                        boolean newEvent=true;
+                        int barIndex=-1;
+                        int eventIndex=-1;
+                        for(int i=0;i<Data.bars.size();++i)
+                        {
+                            if(barid == Data.bars.get(i).getID())
+                            {
+                                barIndex=i;
+                                for(int j=0;j<Data.bars.get(i).events.size();++j)
+                                {
+                                    eventIndex=j;
+                                    newEvent=false;
+                                    break;
+                                }
+                                if(!newEvent) break;
+
+                            }
+                        }
+
+                        if(newEvent)
+                        {
+                            Event event=new Event(drinkid, newName, newDescription);
+                            Data.addEvent(barIndex, event);
+                        }
+                        else//edit an existing drink
+                        {
+                            if(!newName.isEmpty()) Data.bars.get(barIndex).drinks.get(eventIndex).setName(newName);
+                            if(!newDescription.isEmpty()) Data.bars.get(barIndex).drinks.get(eventIndex).setDescription(newDescription);
+                        }
+                    }
+                    catch(NumberFormatException ex) { }
                 }
             }
             return null;

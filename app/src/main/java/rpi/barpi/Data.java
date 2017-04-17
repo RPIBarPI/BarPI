@@ -56,6 +56,36 @@ public class Data
         }
     }
 
+    public static void addDrink(final int barIndex, final Drink newDrink)
+    {
+        if(mainAct != null)
+        {
+            mainAct.runOnUiThread(new Runnable()
+            {
+                public void run()
+                {
+                    bars.get(barIndex).drinks.add(newDrink);
+                    barAct.drinkAdapter.notifyDataSetChanged();
+                }
+            });
+        }
+    }
+
+    public static void addEvent(final int barIndex, final Event newEvent)
+    {
+        if(mainAct != null)
+        {
+            mainAct.runOnUiThread(new Runnable()
+            {
+                public void run()
+                {
+                    bars.get(barIndex).events.add(newEvent);
+                    barAct.eventAdapter.notifyDataSetChanged();
+                }
+            });
+        }
+    }
+
     public static void addMessage(final int barIndex, final int eventid, final Message newMsg)
     {
         if(barChatAct != null)

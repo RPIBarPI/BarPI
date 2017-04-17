@@ -34,9 +34,6 @@ public class Event
     public void setName(String newName) { name=newName; }
     public void setDescription(String newDescription) { description=newDescription; }
 
-    //other
-    public Boolean isSpecial() { return false; }
-
     @Override
     public String toString() {
         String retVal="";
