@@ -10,8 +10,9 @@ public class Bar //basic information on bars
     private float rating;
     public ArrayList<Message> messages =new ArrayList<Message>();
     private Location location=new Location();
-    public ArrayList<Event> events=new ArrayList<Event>();//includes specials
     public ArrayList<Drink> drinks=new ArrayList<Drink>();//the menu
+    public ArrayList<Event> events=new ArrayList<Event>();
+    public ArrayList<Special> specials=new ArrayList<Special>();
 
     //constructors
     public Bar(int newID, String newName, String newDescription, float newRating, Location newLocation)

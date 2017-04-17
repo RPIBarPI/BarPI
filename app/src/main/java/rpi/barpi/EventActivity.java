@@ -22,7 +22,7 @@ public class EventActivity extends AppCompatActivity {
 
     public void rateBar(View v)
     {
-        int rating=0;//doesnt need to be a float, you cant do half stars or fractions
+        float rating=0;
 
         /*if(v.getId() == R.id.ea_btnstarone) rating=1;
         else if(v.getId() == R.id.ea_btnstartwo) rating=2;
@@ -41,6 +41,6 @@ public class EventActivity extends AppCompatActivity {
         Sockets.writeEngine(data);*/
 
         //debugging
-        Toast.makeText(this, Integer.toString(rating)+" stars", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, Float.toString(rating)+" stars", Toast.LENGTH_SHORT).show();
     }
 }

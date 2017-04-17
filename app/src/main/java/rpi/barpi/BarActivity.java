@@ -22,13 +22,17 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
+
 
 public class BarActivity extends AppCompatActivity implements OnMapReadyCallback
 {
     public Bar bar=Data.bars.get(Data.mainAct.contextMenuItemSelected);
     private SupportMapFragment map=null;
     ListView lvEvents;
-    EventAdapter appAdapter=null;
+    EventAdapter eventAdapter=null;
+    ListView lvDrinks;
+    DrinkAdapter drinkAdapter=null;
     public int contextMenuItemSelected = -1;
 
     @Override
@@ -45,11 +49,16 @@ public class BarActivity extends AppCompatActivity implements OnMapReadyCallback
         //Set event gui objects
         map=(SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
         map.getMapAsync(this);
-
         lvEvents=(ListView)findViewById(R.id.eventListView);
-        //Set the lv array
-        appAdapter = new EventAdapter(this, R.layout.event_row_layout, bar.events);
-        lvEvents.setAdapter(appAdapter);
+        lvDrinks=(ListView)findViewById(R.id.drinkListView);
+
+        //Set the lv arrays
+        eventAdapter = new EventAdapter(this, R.layout.event_row_layout, bar.events);
+        lvEvents.setAdapter(eventAdapter);
+        drinkAdapter = new DrinkAdapter(this, R.layout.drink_row_layout, bar.drinks);
+        lvDrinks.setAdapter(drinkAdapter);
+
+        //other gui objs data
         TextView barDesc = (TextView)findViewById(R.id.barDescript);
         barDesc.setText(Data.barAct.bar.getDescription());
 
@@ -66,11 +75,11 @@ public class BarActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
-        //test data
-        bar.events.clear();
-        bar.events.add(new Event(0, "Ladies' Night", "$1 Well drinks for ladies"));
-        bar.events.add(new Event(1, "$3 PBR Pitchers", "From 6-8pm"));
-        bar.events.add(new Event(2, "Buy-one-get-one", "Mondays: 10-11pm"));
+        //Get the bar's drinks and events
+        ArrayList<String> data=new ArrayList<String>();
+        data.add("7");
+        data.add(Integer.toString(bar.getID()));
+        Sockets.writeEngine(data);
     }
 
     @Override

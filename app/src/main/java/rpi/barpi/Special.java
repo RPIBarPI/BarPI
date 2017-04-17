@@ -34,8 +34,4 @@ public class Special extends Event
     //sets
     public void setDrinkID(int newDrinkID) { drinkID=newDrinkID; }
     public void setPrice(float newPrice) { price=newPrice; }
-
-    //other
-    @Override
-    public Boolean isSpecial() { return true; }
 }
