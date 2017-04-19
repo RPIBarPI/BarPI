@@ -30,7 +30,7 @@ public class DrinkAdapter extends ArrayAdapter<Drink> {
         LayoutInflater inflater=(LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view=inflater.inflate(resource, null);
         Drink currentDrink=drinks.get(position);
-
+        // Can expand to have a drink image if available from bar
         //ImageView img = (ImageView)view.findViewById(R.id.drink_img);
 
         TextView drinkTitle = (TextView)view.findViewById(R.id.drink_title);
@@ -67,7 +67,7 @@ public class DrinkAdapter extends ArrayAdapter<Drink> {
 
         if(isSpecial)
         {
-            view.setBackgroundColor(Color.RED);
+            view.setBackgroundColor(ResourcesCompat.getColor(view.getResources(), R.color.colorSpecial2, null));
         }
         else
         {

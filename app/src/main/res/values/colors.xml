@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#900</color>
     <color name="colorAccent">#686868</color>
     <color name="colorRedish">#f6d6d6</color>
+    <color name="colorSpecial">#d65957</color>
+    <color name="colorSpecial2">#fceb6e</color>
 </resources>
