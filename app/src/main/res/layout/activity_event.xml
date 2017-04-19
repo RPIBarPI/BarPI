@@ -5,24 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <ImageView
-        android:id="@+id/eventImage"
+    <TextView
+        android:id="@+id/eventName"
         android:layout_width="match_parent"
-        android:layout_height="15.0mm"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:textSize="27sp"
+        tools:text="Blah blah event name here"/>
 
-        android:layout_centerHorizontal="true"
-        android:contentDescription="Pic of event"
-        app:srcCompat="@android:color/darker_gray" />
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/eventName"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/description"
-        android:layout_width="55.0mm"
+        android:id="@+id/eventDescript"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="textMultiLine"
+        android:textSize="20sp"
         tools:text="Event discription goes here. Image of event goes in gray box above."
-        android:layout_below="@+id/eventImage"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="19dp" />
+        android:layout_below="@+id/ratingBar"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

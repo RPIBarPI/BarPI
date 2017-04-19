@@ -6,6 +6,7 @@ package rpi.barpi;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class EventActivity extends AppCompatActivity {
@@ -17,7 +18,14 @@ public class EventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event);
 
         // Set the title
-        setTitle(event.getName());
+        setTitle(Data.barAct.bar.getName());
+
+        // Set other gui obj data
+        TextView eventNm = (TextView)findViewById(R.id.eventName);
+        eventNm.setText(event.getName());
+
+        TextView eventDesc = (TextView)findViewById(R.id.eventDescript);
+        eventDesc.setText(event.getDescription());
     }
 
     public void rateBar(View v)
