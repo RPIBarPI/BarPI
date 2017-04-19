@@ -1,8 +1,12 @@
 package rpi.barpi;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -58,8 +62,31 @@ public class MainActivity extends AppCompatActivity
         lvbars.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                tempThis.contextMenuItemSelected = position;
-                startActivity(new Intent(tempThis, BarActivity.class));
+                Bar tempBar=barListItems.get(position);
+                for(int i=0;i<Data.bars.size();++i)
+                {
+                    if(Data.bars.get(i).getID() == tempBar.getID())
+                    {
+                        boolean permSet=false;
+                        //permissions
+                        if(ContextCompat.checkSelfPermission(tempThis, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                            ActivityCompat.requestPermissions(tempThis, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
+                        else
+                            permSet=true;
+
+                        if(ContextCompat.checkSelfPermission(tempThis, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                            ActivityCompat.requestPermissions(tempThis, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+                        else
+                            permSet=true;
+
+                        if(permSet)
+                        {
+                            tempThis.contextMenuItemSelected=i;
+                            startActivity(new Intent(tempThis, BarActivity.class));
+                            break;
+                        }
+                    }
+                }
             }
         });
 
@@ -103,6 +130,22 @@ public class MainActivity extends AppCompatActivity
         else data.add("0");
 
         Sockets.connect(data);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
+    {
+        switch(requestCode)
+        {
+            case 0:
+            {
+                if((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED))
+                {
+                    //permission granted, continue
+                }
+                return;
+            }
+        }
     }
 
     @Override
