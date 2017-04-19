@@ -75,9 +75,9 @@ public class BarActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
-        //Get the bar's drinks and events
+        //Get the bar's drinks, events and specials
         ArrayList<String> data=new ArrayList<String>();
-        data.add("7");
+        data.add("8");
         data.add(Integer.toString(bar.getID()));
         Sockets.writeEngine(data);
     }

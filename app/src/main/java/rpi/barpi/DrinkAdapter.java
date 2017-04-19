@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class DrinkAdapter extends ArrayAdapter<Drink> {
@@ -37,23 +38,44 @@ public class DrinkAdapter extends ArrayAdapter<Drink> {
         TextView drinkPrice = (TextView)view.findViewById(R.id.drink_price);
 
 
+        boolean isSpecial=false;
+
         // Go thru all bars in list to lay them out
-        for (int i=0; i<Data.barAct.bar.drinks.size(); ++i) {
-            if(Data.barAct.bar.drinks.get(i).getID() == currentDrink.getID()) {
-                //img.setImageDrawable(Drawable);
-                //barDesc.setText(Data.barAct.bar.getDescription());
+        for (int i=0; i<Data.barAct.bar.drinks.size(); ++i)
+        {
+            if(Data.barAct.bar.drinks.get(i).getID() == currentDrink.getID())
+            {
+
+                float price=Data.barAct.bar.drinks.get(i).getPrice();
+                for(int j=0; j<Data.barAct.bar.specials.size(); ++j)
+                {
+                    //new price because of specials
+                    if(Data.barAct.bar.specials.get(j).getDrinkID() == Data.barAct.bar.drinks.get(i).getID())
+                    {
+                        price=Data.barAct.bar.specials.get(j).getPrice();
+                        isSpecial=true;
+                    }
+                }
+
                 drinkTitle.setText(Data.barAct.bar.drinks.get(i).getName());
                 drinkDesc.setText(Data.barAct.bar.drinks.get(i).getDescription().toString());
-                drinkPrice.setText(Float.toString(Data.barAct.bar.drinks.get(i).getPrice()));
+                NumberFormat format=NumberFormat.getCurrencyInstance();
+                drinkPrice.setText(format.format(price));
                 break;
             }
-
         }
 
-        if (position%2 == 1)
-            view.setBackgroundColor(Color.WHITE);
+        if(isSpecial)
+        {
+            view.setBackgroundColor(Color.RED);
+        }
         else
-            view.setBackgroundColor(ResourcesCompat.getColor(view.getResources(), R.color.colorRedish, null));//red-ish
+        {
+            if (position%2 == 1)
+                view.setBackgroundColor(Color.WHITE);
+            else
+                view.setBackgroundColor(ResourcesCompat.getColor(view.getResources(), R.color.colorRedish, null));//red-ish
+        }
 
         return view;
     }
