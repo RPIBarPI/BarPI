@@ -86,6 +86,21 @@ public class Data
         }
     }
 
+    public static void addSpecial(final int barIndex, final Special newSpecial)
+    {
+        if(mainAct != null)
+        {
+            mainAct.runOnUiThread(new Runnable()
+            {
+                public void run()
+                {
+                    bars.get(barIndex).specials.add(newSpecial);
+                    barAct.drinkAdapter.notifyDataSetChanged();
+                }
+            });
+        }
+    }
+
     public static void addMessage(final int barIndex, final int eventid, final Message newMsg)
     {
         if(barChatAct != null)
