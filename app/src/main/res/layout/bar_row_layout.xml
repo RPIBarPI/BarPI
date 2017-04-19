@@ -10,10 +10,8 @@
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="5dp"
         android:background="@drawable/fluffy_butt_dawg"
         android:gravity="center_vertical" />
 
@@ -21,9 +19,8 @@
         android:id="@+id/bar_title"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:gravity="center_horizontal"
-        android:text="RPI Clubhouse Pub"
+        android:layout_gravity="fill"
         android:textSize="22sp" />
 
     <TextView
@@ -31,9 +28,8 @@
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="5dp"
         android:gravity="center_horizontal"
-        android:text="RPI Student Union: 3rd Floor"
+        android:layout_gravity="fill"
         android:textSize="15sp" />
 
 </LinearLayout>

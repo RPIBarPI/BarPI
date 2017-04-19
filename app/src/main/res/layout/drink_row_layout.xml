@@ -9,9 +9,9 @@
         android:id="@+id/drink_title"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
         android:gravity="center_horizontal"
+        android:layout_gravity="fill"
         android:textSize="20sp" />
 
     <TextView
@@ -19,8 +19,8 @@
         android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="5dp"
         android:gravity="center_horizontal"
+        android:layout_gravity="fill"
         android:textSize="15sp" />
 
     <TextView
@@ -28,8 +28,8 @@
         android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="5dp"
         android:gravity="center_horizontal"
+        android:layout_gravity="fill"
         android:textSize="15sp" />
 
 </LinearLayout>
