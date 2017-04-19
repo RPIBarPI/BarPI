@@ -1,38 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/eventName"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="12dp"
-        android:textSize="27sp"
-        tools:text="Blah blah event name here"/>
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/eventName"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/eventDescript"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:textSize="20sp"
-        tools:text="Event discription goes here. Image of event goes in gray box above."
-        android:layout_below="@+id/ratingBar"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/eventName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:textSize="27sp"
+            tools:text="Blah blah event name here"/>
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/eventName"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/eventDescript"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:textSize="20sp"
+            tools:text="Event discription goes here. Image of event goes in gray box above."
+            android:layout_below="@+id/ratingBar"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>
