@@ -45,10 +45,18 @@ public class EventAdapter extends ArrayAdapter<Event> {
         // Go thru all bars in list to lay them out
         for (int i=0; i<Data.barAct.bar.events.size(); ++i) {
             if(Data.barAct.bar.events.get(i).getID() == currentEvent.getID()) {
+
+                String desc = Data.barAct.bar.events.get(i).getDescription().toString();
+                // Limit length of event description showing in list of events
+                if (desc.length() > 69) {//lol
+                    desc = desc.substring(0,68);
+                    desc+="...";
+                }
+
                 //img.setImageDrawable(Drawable);
                 //barDesc.setText(Data.barAct.bar.getDescription());
                 eventTitle.setText(Data.barAct.bar.events.get(i).getName());
-                eventDesc.setText(Data.barAct.bar.events.get(i).getDescription().toString());
+                eventDesc.setText(desc);
                 break;
             }
 
