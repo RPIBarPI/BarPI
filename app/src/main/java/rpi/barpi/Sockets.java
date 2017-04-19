@@ -63,6 +63,7 @@ public class Sockets
 				 * C: Chat message
 				 * D: Drink data
 				 * H: Event data
+				 * S: Specials data
 				 */
 
                 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -241,9 +242,12 @@ public class Sockets
                                 barIndex=i;
                                 for(int j=0;j<Data.bars.get(i).drinks.size();++j)
                                 {
-                                    drinkIndex=j;
-                                    newDrink=false;
-                                    break;
+                                    if(drinkid == Data.bars.get(i).drinks.get(j).getID())
+                                    {
+                                        drinkIndex=j;
+                                        newDrink=false;
+                                        break;
+                                    }
                                 }
                                 if(!newDrink) break;
 
@@ -277,7 +281,7 @@ public class Sockets
                         int barid=Integer.parseInt(data.get(0));
 
                         //get the event id
-                        int drinkid=Integer.parseInt(data.get(1));
+                        int eventid=Integer.parseInt(data.get(1));
 
                         //get the other fields
                         Map<String, String> fieldData=new HashMap<String, String>();
@@ -308,9 +312,12 @@ public class Sockets
                                 barIndex=i;
                                 for(int j=0;j<Data.bars.get(i).events.size();++j)
                                 {
-                                    eventIndex=j;
-                                    newEvent=false;
-                                    break;
+                                    if(eventid == Data.bars.get(i).events.get(j).getID())
+                                    {
+                                        eventIndex=j;
+                                        newEvent=false;
+                                        break;
+                                    }
                                 }
                                 if(!newEvent) break;
 
@@ -319,13 +326,90 @@ public class Sockets
 
                         if(newEvent)
                         {
-                            Event event=new Event(drinkid, newName, newDescription);
+                            Event event=new Event(eventid, newName, newDescription);
                             Data.addEvent(barIndex, event);
                         }
                         else//edit an existing drink
                         {
-                            if(!newName.isEmpty()) Data.bars.get(barIndex).drinks.get(eventIndex).setName(newName);
-                            if(!newDescription.isEmpty()) Data.bars.get(barIndex).drinks.get(eventIndex).setDescription(newDescription);
+                            if(!newName.isEmpty()) Data.bars.get(barIndex).events.get(eventIndex).setName(newName);
+                            if(!newDescription.isEmpty()) Data.bars.get(barIndex).events.get(eventIndex).setDescription(newDescription);
+                        }
+                    }
+                    catch(NumberFormatException ex) { }
+                }
+                else if(command.equals("S"))//specials
+                {
+                    //determine based on the id whether to update an existing
+                    //specials or make a new one
+                    //S|barid|eventid|field|value|...|...\|
+                    if(data.size() < 4) continue;
+
+                    try
+                    {
+                        //get the bar id
+                        int barid=Integer.parseInt(data.get(0));
+
+                        //get the event id
+                        int specialid=Integer.parseInt(data.get(1));
+
+                        //get the other fields
+                        Map<String, String> fieldData=new HashMap<String, String>();
+
+                        for(int i=2;i<data.size();i+=2)
+                            fieldData.put(data.get(i), data.get(i+1));
+
+                        //set the fields
+                        String newName="";
+                        String newDescription="";
+                        int newEventID=0;
+                        int newDrinkID=0;
+                        float newPrice=0.0f;
+
+                        Iterator it=fieldData.entrySet().iterator();
+                        while(it.hasNext())
+                        {
+                            Map.Entry pair=(Map.Entry)it.next();
+
+                            if(pair.getKey().equals("name")) newName=pair.getValue().toString();
+                            if(pair.getKey().equals("description")) newDescription=pair.getValue().toString();
+                            if(pair.getKey().equals("eventid")) newEventID=Integer.parseInt(pair.getValue().toString());
+                            if(pair.getKey().equals("drinkid")) newDrinkID=Integer.parseInt(pair.getValue().toString());
+                            if(pair.getKey().equals("price")) newPrice=Float.parseFloat(pair.getValue().toString());
+                        }
+
+                        boolean newSpecial=true;
+                        int barIndex=-1;
+                        int specialIndex=-1;
+                        for(int i=0;i<Data.bars.size();++i)
+                        {
+                            if(barid == Data.bars.get(i).getID())
+                            {
+                                barIndex=i;
+                                for(int j=0;j<Data.bars.get(i).specials.size();++j)
+                                {
+                                    if(specialid == Data.bars.get(i).specials.get(j).getID())
+                                    {
+                                        specialIndex=j;
+                                        newSpecial=false;
+                                        break;
+                                    }
+                                }
+                                if(!newSpecial) break;
+                            }
+                        }
+
+                        if(newSpecial)
+                        {
+                            Special special=new Special(specialid, newName, newDescription, newEventID, newDrinkID, newPrice);
+                            Data.addSpecial(barIndex, special);
+                        }
+                        else//edit an existing special
+                        {
+                            if(!newName.isEmpty()) Data.bars.get(barIndex).specials.get(specialIndex).setName(newName);
+                            if(!newDescription.isEmpty()) Data.bars.get(barIndex).specials.get(specialIndex).setDescription(newDescription);
+                            if(newEventID > 0) Data.bars.get(barIndex).specials.get(specialIndex).setEventID(newEventID);
+                            if(newDrinkID > 0) Data.bars.get(barIndex).specials.get(specialIndex).setDrinkID(newDrinkID);
+                            if(newPrice > 0.0f) Data.bars.get(barIndex).specials.get(specialIndex).setPrice(newPrice);
                         }
                     }
                     catch(NumberFormatException ex) { }
