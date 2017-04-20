@@ -166,7 +166,31 @@ public class MainActivity extends AppCompatActivity
         int id=item.getItemId();
         if(id == R.id.bar_main_open)
         {
-            Toast.makeText(this, "Opening bar info...", Toast.LENGTH_SHORT).show();
+            Bar tempBar=barListItems.get(contextMenuItemSelected);
+            for(int i=0;i<Data.bars.size();++i)
+            {
+                if(Data.bars.get(i).getID() == tempBar.getID())
+                {
+                    boolean permSet=false;
+                    //permissions
+                    if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
+                    else
+                        permSet=true;
+
+                    if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+                    else
+                        permSet=true;
+
+                    if(permSet)
+                    {
+                        contextMenuItemSelected=i;//reassign it
+                        startActivity(new Intent(this, BarActivity.class));
+                        break;
+                    }
+                }
+            }
             return true;
         }
 
