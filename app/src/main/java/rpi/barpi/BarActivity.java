@@ -2,6 +2,7 @@ package rpi.barpi;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +35,11 @@ public class BarActivity extends AppCompatActivity implements OnMapReadyCallback
     EventAdapter eventAdapter=null;
     ListView lvDrinks;
     DrinkAdapter drinkAdapter=null;
+    RatingBar rb;
+    TextView rbText;
+
     public int contextMenuItemSelected = -1;
+    float barRating=0.0f;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -49,6 +55,8 @@ public class BarActivity extends AppCompatActivity implements OnMapReadyCallback
         //Set event gui objects
         map=(SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
         map.getMapAsync(this);
+        rb=(RatingBar)findViewById(R.id.ratingBar);
+        rbText=(TextView)findViewById(R.id.ratingBarText);
         lvEvents=(ListView)findViewById(R.id.eventListView);
         lvDrinks=(ListView)findViewById(R.id.drinkListView);
 
@@ -61,6 +69,48 @@ public class BarActivity extends AppCompatActivity implements OnMapReadyCallback
         //other gui objs data
         TextView barDesc = (TextView)findViewById(R.id.barDescript);
         barDesc.setText(Data.barAct.bar.getDescription());
+        rb.setRating(bar.getRating());
+
+        loadRating();//load the rating from the saved data
+
+        //Rating bar event "click"
+        rb.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener()
+        {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser)
+            {
+                if(fromUser)
+                {
+                    if((rating < 1.0f) || (rating > 5.0f)) return;
+
+                    //tell the server
+                    ArrayList<String> data=new ArrayList<String>();
+                    data.add("1");
+                    data.add(Integer.toString(bar.getID()));
+                    data.add("0");//event id
+                    data.add(Float.toString(rating-barRating));//barRating is 0 if not rated
+
+                    if((barRating >= 1.0f) && (barRating <= 5.0f))//bar already rated?
+                        data.add("1");
+                    else
+                        data.add("0");
+
+                    Sockets.writeEngine(data);
+
+                    //save the rating you rated to the class & storage
+                    barRating=rating;
+                    saveRating();
+
+                    //some posivitve RFT and set the textview
+                    rbText.setText("You rated this bar "+Float.toString(barRating)+" stars!");
+                    Toast.makeText(Data.barAct, "Thank you for rating!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        //set the rating text
+        if((barRating >= 1.0f) && (barRating <= 5.0f))
+            rbText.setText("You rated this bar "+Float.toString(barRating)+" stars!");
 
         // Long click event
         registerForContextMenu(lvEvents);
@@ -154,27 +204,15 @@ public class BarActivity extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
-    public void rateBar(View v)
+    private void loadRating()
     {
-        int rating=0;//doesnt need to be a float, you cant do half stars or fractions
+        barRating=Data.saveData.getFloat("barRating"+Integer.toString(bar.getID()), 0.0f);
+    }
 
-        /*if(v.getId() == R.id.ba_btnstarone) rating=1;
-        else if(v.getId() == R.id.ba_btnstartwo) rating=2;
-        else if(v.getId() == R.id.ba_btnstarthree) rating=3;
-        else if(v.getId() == R.id.ba_btnstarfour) rating=4;
-        else if(v.getId() == R.id.ba_btnstarfive) rating=5;
-
-        if((rating < 1) || (rating > 5)) return;*/
-
-        //tell the server
-        /*ArrayList<String> data=new ArrayList<String>();
-        data.add("2");
-        data.add(Integer.toString(bar.getID()));
-        data.add(Integer.toString(rating));
-
-        Sockets.writeEngine(data);*/
-
-        //debugging
-        Toast.makeText(this, Integer.toString(rating)+" stars", Toast.LENGTH_SHORT).show();
+    public void saveRating()
+    {
+        SharedPreferences.Editor SDEditor=Data.saveData.edit();
+        SDEditor.putFloat("barRating"+Integer.toString(bar.getID()), barRating);
+        SDEditor.apply();
     }
 }

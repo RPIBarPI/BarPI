@@ -24,11 +24,21 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
+        <TextView
+            android:id="@+id/ratingBarText"
+            android:layout_below="@id/ratingBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Rate the bar!"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+
         <fragment
             android:id="@+id/map"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_below="@+id/ratingBar"
+            android:layout_below="@+id/ratingBarText"
             class="com.google.android.gms.maps.SupportMapFragment" />
 
         <TextView
@@ -36,8 +46,7 @@
             android:layout_below="@id/map"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            />
+            android:gravity="center_horizontal" />
 
         <TextView
             android:id="@+id/barEventHint"
@@ -46,8 +55,7 @@
             android:layout_height="wrap_content"
             android:text="Events"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            />
+            android:layout_marginBottom="10dp" />
 
         <ListView
             android:id="@+id/eventListView"
@@ -55,8 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            />
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/barMenuHint"
@@ -65,8 +72,7 @@
             android:layout_height="wrap_content"
             android:text="Drink Menu"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            />
+            android:layout_marginBottom="10dp" />
 
         <ListView
             android:id="@+id/drinkListView"
@@ -74,8 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            />
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 
