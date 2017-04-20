@@ -14,7 +14,7 @@ import java.util.Map;
 public class Sockets
 {
     private static Socket sock;
-    private static final String serverIP="seanwaclawik.com";
+    private static final String serverIP="67.240.42.42";
     private static final int mainPort=42069;
     private static DataOutputStream out;
     private static DataInputStream in;
@@ -157,7 +157,23 @@ public class Sockets
                         {
                             if(!newName.isEmpty()) Data.bars.get(barIndex).setName(newName);
                             if(!newDescription.isEmpty()) Data.bars.get(barIndex).setDescription(newDescription);
-                            if(newRating > 0.0f) Data.bars.get(barIndex).setRating(newRating);
+                            if(newRating > 0.0f)
+                            {
+                                Data.bars.get(barIndex).setRating(newRating);
+
+                                final float tempRating=newRating;
+                                //update the Bar Activity rating bar
+                                if(Data.barAct != null)
+                                {
+                                    Data.barAct.runOnUiThread(new Runnable()
+                                    {
+                                        public void run()
+                                        {
+                                            Data.barAct.rb.setRating(tempRating);
+                                        }
+                                    });
+                                }
+                            }
                             if(!newAptNo.isEmpty()) Data.bars.get(barIndex).getLocation().setAptsuite(newAptNo);
                             if(!newStreet.isEmpty()) Data.bars.get(barIndex).getLocation().setStreet(newStreet);
                             if(!newCity.isEmpty()) Data.bars.get(barIndex).getLocation().setCity(newCity);
