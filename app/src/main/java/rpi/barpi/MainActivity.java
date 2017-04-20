@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,7 +18,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity
     BarAdapter appAdapter=null;
 
     public int contextMenuItemSelected=-1;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -121,6 +119,27 @@ public class MainActivity extends AppCompatActivity
                 //
             }
         });
+
+        //refresh
+        final SwipeRefreshLayout feedswiperefresh=(SwipeRefreshLayout)findViewById(R.id.feedswiperefresh);
+        feedswiperefresh.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener()
+                {
+                    @Override
+                    public void onRefresh()
+                    {
+                        //request the bars again
+                        ArrayList<String> data=new ArrayList<String>();
+                        data.add("0");
+                        data.add("password");
+
+                        Sockets.writeEngine(data);
+
+                        //stop the spinning thing
+                        feedswiperefresh.setRefreshing(false);
+                    }
+                }
+        );
 
         //connect to the server
         ArrayList<String> data=new ArrayList<String>();
