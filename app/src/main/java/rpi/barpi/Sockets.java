@@ -14,7 +14,7 @@ import java.util.Map;
 public class Sockets
 {
     private static Socket sock;
-    private static final String serverIP="67.240.42.42";
+    private static final String serverIP="seanwaclawik.com";
     private static final int mainPort=42069;
     private static DataOutputStream out;
     private static DataInputStream in;
