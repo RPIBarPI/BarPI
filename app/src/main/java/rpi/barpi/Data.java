@@ -65,7 +65,7 @@ public class Data
                 public void run()
                 {
                     bars.get(barIndex).drinks.add(newDrink);
-                    barAct.drinkAdapter.notifyDataSetChanged();
+                    if(barAct != null) barAct.drinkAdapter.notifyDataSetChanged();
                 }
             });
         }
@@ -80,7 +80,7 @@ public class Data
                 public void run()
                 {
                     bars.get(barIndex).events.add(newEvent);
-                    barAct.eventAdapter.notifyDataSetChanged();
+                    if(barAct != null) barAct.eventAdapter.notifyDataSetChanged();
                 }
             });
         }
@@ -95,7 +95,7 @@ public class Data
                 public void run()
                 {
                     bars.get(barIndex).specials.add(newSpecial);
-                    barAct.drinkAdapter.notifyDataSetChanged();
+                    if(barAct != null) barAct.drinkAdapter.notifyDataSetChanged();
                 }
             });
         }
