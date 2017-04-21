@@ -1,18 +1,19 @@
 package rpi.barpi;
 
-import android.media.Image;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.content.res.ResourcesCompat;
-import android.widget.ArrayAdapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -42,14 +43,16 @@ public class BarAdapter extends ArrayAdapter<Bar> {
         TextView barLoc = (TextView)view.findViewById(R.id.bar_location);
 
         // Go thru all bars in list to lay them out
-        for (int i=0; i<Data.bars.size(); ++i) {
-            if(Data.bars.get(i).getID() == currentBar.getID()) {
-                //img.setImageDrawable(Drawable);
+        for(int i=0;i<Data.bars.size();++i)
+        {
+            if(Data.bars.get(i).getID() == currentBar.getID())
+            {
+                Drawable d=LoadImageFromWebOperations("http://seanwaclawik.com/barpi/img/bars/"+Integer.toString(Data.bars.get(i).getID())+".jpg");
+                if(d != null) img.setImageDrawable(d);
                 barTitle.setText(Data.bars.get(i).getName());
                 barLoc.setText(Data.bars.get(i).getLocation().toString());
                 break;
             }
-
         }
 
         if (position%2 == 1)
@@ -58,5 +61,19 @@ public class BarAdapter extends ArrayAdapter<Bar> {
             view.setBackgroundColor(ResourcesCompat.getColor(view.getResources(), R.color.colorRedish, null));//red-ish
 
         return view;
+    }
+
+    public static Drawable LoadImageFromWebOperations(String url)
+    {
+        try
+        {
+            InputStream is=(InputStream)new URL(url).getContent();
+            Drawable d=Drawable.createFromStream(is, "bar");
+            return d;
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
 }
