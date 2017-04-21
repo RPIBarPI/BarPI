@@ -23,6 +23,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
@@ -198,8 +199,12 @@ public class BarActivity extends AppCompatActivity implements OnMapReadyCallback
         {
             if((bar.getLocation().getLongitude() != 360.0f) && (bar.getLocation().getLatitude() != 360.0f))
             {
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(bar.getLocation().getLatitude(), bar.getLocation().getLongitude()), 16));
+                LatLng latLng=new LatLng(bar.getLocation().getLatitude(), bar.getLocation().getLongitude());
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
                 map.setMyLocationEnabled(true);
+
+                MarkerOptions marker=new MarkerOptions().position(latLng).title(bar.getName());
+                map.addMarker(marker);
             }
         }
     }
