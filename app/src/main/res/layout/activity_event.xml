@@ -24,13 +24,22 @@
             android:textSize="27sp"
             tools:text="Blah blah event name here"/>
 
-        <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/eventName"
-            android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true" />
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/ratingBarText"
+                android:layout_below="@id/ratingBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Rate the bar!"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp" />
 
         <TextView
             android:id="@+id/eventDescript"
@@ -42,7 +51,7 @@
             android:inputType="textMultiLine"
             android:textSize="20sp"
             tools:text="Event discription goes here. Image of event goes in gray box above."
-            android:layout_below="@+id/ratingBar"
+            android:layout_below="@+id/ratingBarText"
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>

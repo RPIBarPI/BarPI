@@ -308,6 +308,8 @@ public class Sockets
                         //set the fields
                         String newName="";
                         String newDescription="";
+                        float newRating=0.0f;
+                        int timesRated=0;
 
                         Iterator it=fieldData.entrySet().iterator();
                         while(it.hasNext())
@@ -316,6 +318,8 @@ public class Sockets
 
                             if(pair.getKey().equals("name")) newName=pair.getValue().toString();
                             if(pair.getKey().equals("description")) newDescription=pair.getValue().toString();
+                            if(pair.getKey().equals("rating")) newRating=Float.parseFloat(pair.getValue().toString());
+                            if(pair.getKey().equals("timesrated")) timesRated=Integer.parseInt(pair.getValue().toString());
                         }
 
                         boolean newEvent=true;
@@ -340,15 +344,35 @@ public class Sockets
                             }
                         }
 
+                        if(timesRated > 0) newRating/=(float)timesRated;
+                        else newRating=0.0f;
+
                         if(newEvent)
                         {
-                            Event event=new Event(eventid, newName, newDescription);
+                            Event event=new Event(eventid, newName, newDescription, newRating);
                             Data.addEvent(barIndex, event);
                         }
                         else//edit an existing drink
                         {
                             if(!newName.isEmpty()) Data.bars.get(barIndex).events.get(eventIndex).setName(newName);
                             if(!newDescription.isEmpty()) Data.bars.get(barIndex).events.get(eventIndex).setDescription(newDescription);
+                            if(newRating > 0.0f)
+                            {
+                                Data.bars.get(barIndex).events.get(eventIndex).setRating(newRating);
+
+                                final float tempRating=newRating;
+                                //update the Bar Activity rating bar
+                                if(Data.eventAct != null)
+                                {
+                                    Data.eventAct.runOnUiThread(new Runnable()
+                                    {
+                                        public void run()
+                                        {
+                                            Data.eventAct.rb.setRating(tempRating);
+                                        }
+                                    });
+                                }
+                            }
                         }
                     }
                     catch(NumberFormatException ex) { }
