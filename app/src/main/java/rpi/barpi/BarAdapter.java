@@ -48,6 +48,7 @@ public class BarAdapter extends ArrayAdapter<Bar> {
             if(Data.bars.get(i).getID() == currentBar.getID())
             {
                 Drawable d=LoadImageFromWebOperations("http://seanwaclawik.com/barpi/img/bars/"+Integer.toString(Data.bars.get(i).getID())+".jpg");
+                //Log.d("PIC", "http://seanwaclawik.com/barpi/img/bars/"+Integer.toString(Data.bars.get(i).getID())+".jpg");
                 if(d != null) img.setImageDrawable(d);
                 barTitle.setText(Data.bars.get(i).getName());
                 barLoc.setText(Data.bars.get(i).getLocation().toString());

@@ -361,7 +361,7 @@ public class Sockets
                                 Data.bars.get(barIndex).events.get(eventIndex).setRating(newRating);
 
                                 final float tempRating=newRating;
-                                //update the Bar Activity rating bar
+                                //update the event Activity rating bar
                                 if(Data.eventAct != null)
                                 {
                                     Data.eventAct.runOnUiThread(new Runnable()
@@ -401,6 +401,8 @@ public class Sockets
                         //set the fields
                         String newName="";
                         String newDescription="";
+                        float newRating=0.0f;
+                        int timesRated=0;
                         int newEventID=0;
                         int newDrinkID=0;
                         float newPrice=0.0f;
@@ -412,6 +414,8 @@ public class Sockets
 
                             if(pair.getKey().equals("name")) newName=pair.getValue().toString();
                             if(pair.getKey().equals("description")) newDescription=pair.getValue().toString();
+                            if(pair.getKey().equals("rating")) newRating=Float.parseFloat(pair.getValue().toString());
+                            if(pair.getKey().equals("timesrated")) timesRated=Integer.parseInt(pair.getValue().toString());
                             if(pair.getKey().equals("eventid")) newEventID=Integer.parseInt(pair.getValue().toString());
                             if(pair.getKey().equals("drinkid")) newDrinkID=Integer.parseInt(pair.getValue().toString());
                             if(pair.getKey().equals("price")) newPrice=Float.parseFloat(pair.getValue().toString());
@@ -438,15 +442,35 @@ public class Sockets
                             }
                         }
 
+                        if(timesRated > 0) newRating/=(float)timesRated;
+                        else newRating=0.0f;
+
                         if(newSpecial)
                         {
-                            Special special=new Special(specialid, newName, newDescription, newEventID, newDrinkID, newPrice);
+                            Special special=new Special(specialid, newName, newDescription, newRating, newEventID, newDrinkID, newPrice);
                             Data.addSpecial(barIndex, special);
                         }
                         else//edit an existing special
                         {
                             if(!newName.isEmpty()) Data.bars.get(barIndex).specials.get(specialIndex).setName(newName);
                             if(!newDescription.isEmpty()) Data.bars.get(barIndex).specials.get(specialIndex).setDescription(newDescription);
+                            if(newRating > 0.0f)
+                            {
+                                Data.bars.get(barIndex).specials.get(specialIndex).setRating(newRating);
+
+                                final float tempRating=newRating;
+                                //update the event Activity rating bar
+                                if(Data.eventAct != null)
+                                {
+                                    Data.eventAct.runOnUiThread(new Runnable()
+                                    {
+                                        public void run()
+                                        {
+                                            Data.eventAct.rb.setRating(tempRating);
+                                        }
+                                    });
+                                }
+                            }
                             if(newEventID > 0) Data.bars.get(barIndex).specials.get(specialIndex).setEventID(newEventID);
                             if(newDrinkID > 0) Data.bars.get(barIndex).specials.get(specialIndex).setDrinkID(newDrinkID);
                             if(newPrice > 0.0f) Data.bars.get(barIndex).specials.get(specialIndex).setPrice(newPrice);

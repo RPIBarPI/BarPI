@@ -15,17 +15,17 @@ public class Special extends Event
         price=0.0f;
     }
 
-    public Special(int newID, String newName, String newDescription)
+    public Special(int newID, String newName, String newDescription, float newRating)
     {
-        super(newID, newName, newDescription);
+        super(newID, newName, newDescription, newRating);
         eventID=-1;
         drinkID=-1;
         price=0.0f;
     }
 
-    public Special(int newID, String newName, String newDescription, int newEventID, int newDrinkID, float newPrice)
+    public Special(int newID, String newName, String newDescription, float newRating, int newEventID, int newDrinkID, float newPrice)
     {
-        super(newID, newName, newDescription);
+        super(newID, newName, newDescription, newRating);
         eventID=newEventID;
         drinkID=newDrinkID;
         price=newPrice;
