@@ -47,9 +47,7 @@ public class BarAdapter extends ArrayAdapter<Bar> {
         {
             if(Data.bars.get(i).getID() == currentBar.getID())
             {
-                Drawable d=LoadImageFromWebOperations("http://seanwaclawik.com/barpi/img/bars/"+Integer.toString(Data.bars.get(i).getID())+".jpg");
-                //Log.d("PIC", "http://seanwaclawik.com/barpi/img/bars/"+Integer.toString(Data.bars.get(i).getID())+".jpg");
-                if(d != null) img.setImageDrawable(d);
+                setBarImage(img, "http://seanwaclawik.com/barpi/img/bars/"+Integer.toString(Data.bars.get(i).getID())+".jpg");
                 barTitle.setText(Data.bars.get(i).getName());
                 barLoc.setText(Data.bars.get(i).getLocation().toString());
                 break;
@@ -64,17 +62,26 @@ public class BarAdapter extends ArrayAdapter<Bar> {
         return view;
     }
 
-    public static Drawable LoadImageFromWebOperations(String url)
+    private void setBarImage(final ImageView img, final String url)
     {
-        try
+        Runnable writeRun=new Runnable()
         {
-            InputStream is=(InputStream)new URL(url).getContent();
-            Drawable d=Drawable.createFromStream(is, "bar");
-            return d;
-        }
-        catch(Exception ex)
-        {
-            return null;
-        }
+            public void run()
+            {
+                try
+                {
+                    InputStream is=(InputStream)new URL(url).getContent();
+                    Drawable d=Drawable.createFromStream(is, "bar");
+                    img.setImageDrawable(d);
+                }
+                catch(Exception ex)
+                {
+                    //
+                }
+            }
+        };
+        Thread fluffyButtDawgThread=new Thread(writeRun);
+        fluffyButtDawgThread.start();
+
     }
 }
