@@ -20,7 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:layout_marginTop="12dp"
             android:textSize="27sp"
             tools:text="Blah blah event name here"/>
 
@@ -28,7 +27,7 @@
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
+                android:layout_below="@+id/eventName"
                 android:layout_centerHorizontal="true" />
 
             <TextView
@@ -37,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="Rate the bar!"
+                android:text="Rate the event!"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp" />
 
